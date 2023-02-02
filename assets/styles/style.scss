@@ -1,6 +1,7 @@
 
 $color-primary: #0D1F2D;
 $color-secondary: #546A7B;
+$text-color: lighten($color-secondary, 30);
 
 @import "~bootstrap/scss/bootstrap";
 @import "app";

@@ -11,6 +11,7 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 3. Run `docker compose up` (the logs will be displayed in the current shell)
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+6. Run `bin/console translation:extract --force --format=yaml --sort=asc --as-tree=6 sk` to generate translations
 
 ## Features
 

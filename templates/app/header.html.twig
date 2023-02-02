@@ -5,7 +5,7 @@
         <div class="bg bg3"></div>
         <div class="content">
             <h1>{{ 'app.header.title'|trans }}</h1>
-            <p>{{ 'app.header.content'|trans }}</p>
+            <p>{{ 'app.header.content'|trans({'{symfony_interval}': symfonyInterval}) }}</p>
         </div>
     </div>
 </turbo-frame>

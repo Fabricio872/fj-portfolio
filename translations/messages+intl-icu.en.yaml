@@ -1,0 +1,8 @@
+lang: en
+title: __title
+app:
+    header:
+        title: __app.header.title
+        content: "%work%"
+navbar:
+    title: __navbar.title
