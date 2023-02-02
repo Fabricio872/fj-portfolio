@@ -1,0 +1,12 @@
+
+$color-primary: #0D1F2D;
+$color-secondary: #546A7B;
+
+@import "~bootstrap/scss/bootstrap";
+@import "app";
+
+#footer{
+  div{
+    background-color: $color-primary;
+  }
+}

@@ -43,6 +43,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		yarn \
 	;
 
 RUN set -eux; \
@@ -117,6 +118,11 @@ RUN set -eux; \
 	install-php-extensions xdebug
 
 RUN rm -f .env.local.php
+
+RUN apk add --no-cache \
+		bash \
+		bash-completion \
+	;
 
 # Caddy image
 FROM caddy:2.6-alpine AS app_caddy

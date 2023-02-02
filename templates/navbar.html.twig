@@ -1,0 +1,8 @@
+{% import "component/navbar.component.twig" as navbar %}
+<turbo-frame id="navbar">
+    <nav class="navbar bg-light sticky-top">
+        <div class="container-fluid">
+            {{ navbar.link(path('app.index'), 'navbar.title'|trans) }}
+        </div>
+    </nav>
+</turbo-frame>
