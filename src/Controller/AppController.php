@@ -16,7 +16,7 @@ class AppController extends AbstractController
     public function index(Request $request): Response
     {
         Carbon::setLocale($request->getLocale());
-        $startDate = Carbon::create(new DateTime('1.12.2017'));
+        $startDate = Carbon::create(new DateTime('1.12.2017 08:00'));
 
         return $this->render('app/index.html.twig', [
             'symfonyInterval' => $startDate->longRelativeToNowDiffForHumans(parts: 5)

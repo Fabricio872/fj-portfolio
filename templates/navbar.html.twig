@@ -1,25 +1,43 @@
-    <nav class="navbar sticky-top navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app.index') }}">{{ 'navbar.title'|trans }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<div id="navbar">
+    <svg id="navbar-button" class="ham ham3 active" viewBox="0 0 100 100" width="80" type="button" data-bs-toggle="offcanvas"
+         data-bs-target="#offcanvas-navbar"
+         aria-controls="offcanvas-navbar">
+        <path
+                class="line top"
+                d="m 70,33 h -40 c -11.092231,0 11.883874,13.496726 -3.420361,12.956839 -0.962502,-2.089471 -2.222071,-3.282996 -4.545687,-3.282996 -2.323616,0 -5.113897,2.622752 -5.113897,7.071068 0,4.448316 2.080609,7.007933 5.555839,7.007933 2.401943,0 2.96769,-1.283974 4.166879,-3.282995 2.209342,0.273823 4.031294,1.642466 5.857227,-0.252538 v -13.005715 16.288404 h 7.653568"/>
+        <path
+                class="line middle"
+                d="m 70,50 h -40 c -5.6862,0 -8.534259,5.373483 -8.534259,11.551069 0,7.187738 3.499166,10.922274 13.131984,10.922274 11.021777,0 7.022787,-15.773343 15.531095,-15.773343 3.268142,0 5.177031,-2.159429 5.177031,-6.7 0,-4.540571 -1.766442,-7.33533 -5.087851,-7.326157 -3.321409,0.0092 -5.771288,2.789632 -5.771288,7.326157 0,4.536525 2.478983,6.805271 5.771288,6.7"/>
+        <path
+                class="line bottom"
+                d="m 70,67 h -40 c 0,0 -3.680675,0.737051 -3.660714,-3.517857 0.02541,-5.415597 3.391687,-10.357143 10.982142,-10.357143 4.048418,0 17.88928,0.178572 23.482143,0.178572 0,2.563604 2.451177,3.403635 4.642857,3.392857 2.19168,-0.01078 4.373905,-1.369814 4.375,-3.392857 0.0011,-2.023043 -1.924401,-2.589191 -4.553571,-4.107143 -2.62917,-1.517952 -4.196429,-1.799562 -4.196429,-3.660714 0,-1.861153 2.442181,-3.118811 4.196429,-3.035715 1.754248,0.0831 4.375,0.890841 4.375,3.125 2.628634,0 6.160714,0.267857 6.160714,0.267857 l -0.178571,-2.946428 10.178571,0 -10.178571,0 v 6.696428 l 8.928571,0 -8.928571,0 v 7.142858 l 10.178571,0 -10.178571,0"/>
+    </svg>
 
-                </ul>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link btn {{ app.request.locale == "sk"? "active btn-outline" }}"
-                           href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'sk'})) }}">SK</a>
+    <div class="offcanvas offcanvas-start show" data-bs-backdrop="false" data-bs-scroll="true" tabindex="-1" id="offcanvas-navbar"
+         aria-labelledby="{{ 'navbarLabel'|trans }}">
+        <div class="offcanvas-body mt-5">
+            <nav id="navbar-scrollspy">
+                <ul class="nav flex-column">
+                    <li class="nav-item m-1">
+                        <a class="nav-link btn"
+                           href="#app-header">{{ 'navbar.item.header'|trans }}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn {{ app.request.locale == "en"? "active btn-outline" }}"
-                           href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'en'})) }}">EN</a>
+                    <li class="nav-item m-1">
+                        <a class="nav-link btn"
+                           href="#app-web">{{ 'navbar.item.web'|trans }}</a>
                     </li>
                 </ul>
-            </div>
+            </nav>
+            <ul class="nav fixed-bottom m-3">
+                <li class="nav-item w-auto m-1">
+                    <a class="nav-link btn d-inline-block {{ app.request.locale == "sk"? "active btn-outline" }}"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'sk'})) }}">SK</a>
+                </li>
+                <li class="nav-item w-auto m-1">
+                    <a class="nav-link btn d-inline-block {{ app.request.locale == "en"? "active btn-outline" }}"
+                       href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'en'})) }}">EN</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</div>

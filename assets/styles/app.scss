@@ -1,56 +1,165 @@
-#app-header {
-  div {
-    height: calc(100vh - 56px);
-    overflow: hidden;
-    position: relative;
 
-    .bg {
-      animation: slide 3s ease-in-out infinite alternate;
-      background-image: linear-gradient(-60deg, $color-primary 50%, $color-secondary 50%);
-      bottom: 0;
-      left: -50%;
-      opacity: .5;
-      position: absolute;
-      right: -50%;
-      top: 0;
-      z-index: -1;
+#app {
+  scroll-snap-type: both mandatory;
+
+  turbo-frame {
+    scroll-snap-align: center;
+
+    div {
+      position: relative;
     }
+  }
 
-    .bg2 {
-      animation-direction: alternate-reverse;
-      animation-duration: 4s;
-    }
+  #app-header {
 
-    .bg3 {
-      animation-duration: 5s;
-    }
+    #head {
+      overflow: hidden;
+      height: 100vh;
 
-    .content {
-      background-color: rgba($color-primary, .6);
-      border-radius: .25em;
-      box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
-      box-sizing: border-box;
-      left: 50%;
-      padding: 3vmin;
-      position: absolute;
-      text-align: center;
-      color: $text-color;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      height: auto;
-      min-width: 20em;
-    }
-
-    h1 {
-      font-family: monospace;
-    }
-
-    @keyframes slide {
-      0% {
-        transform: translateX(-25%);
+      .bg {
+        animation: slide 3s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg, $color-primary 50%, $color-secondary 50%);
+        bottom: 0;
+        left: -50%;
+        opacity: .5;
+        position: absolute;
+        right: -50%;
+        top: 0;
+        z-index: -1;
       }
-      100% {
-        transform: translateX(25%);
+
+      .bg2 {
+        animation-direction: alternate-reverse;
+        animation-duration: 4s;
+      }
+
+      .bg3 {
+        animation-duration: 5s;
+      }
+
+      .content {
+        background-color: rgba($color-primary, .75);
+        border-radius: $border-radius;
+        box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
+        box-sizing: border-box;
+        left: 50%;
+        padding: 3vmin;
+        position: absolute;
+        text-align: center;
+        color: $text-color;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        width: calc(100% - 15em);
+        max-width: 50em;
+        min-width: 20em;
+      }
+
+      @keyframes slide {
+        0% {
+          transform: translateX(-25%);
+        }
+        100% {
+          transform: translateX(25%);
+        }
+      }
+    }
+  }
+
+  #app-web {
+
+    .card {
+      background-color: rgba($color-primary, .75);
+      color: $text-color;
+      overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .image{
+      width: 100%;
+      height: 150px;
+    }
+
+    .background {
+      $total: 144;
+      $time: 4;
+      $height: 400;
+      $percent: .69444%;
+      $dotSize: .9;
+
+      overflow: hidden;
+      height: calc(100% + 4rem);
+      width: 100%;
+      position: absolute;
+      margin-top: -3rem;
+      background-color: $color-secondary;
+      z-index: -1;
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        background: black;
+        overflow: hidden;
+      }
+
+      .wrap {
+        position: relative;
+        height: 100%;
+      }
+
+      .c {
+        position: relative;
+        height: $height+px;
+        width: $percent;
+        margin-top: -$height+px;
+        animation: drop $time+s infinite ease-in;
+
+        &:after {
+          content: "";
+          position: absolute;
+          width: $dotSize+vw;
+          height: $dotSize+vw;
+          border-radius: 50%;
+          left: 50%;
+          bottom: - calc($dotSize/2)+vw;
+          margin-left: - calc($dotSize/2)+vw;
+        }
+      }
+
+      @for $i from 1 through $total {
+        $hue: calc(300/$total) * $i;
+        .c:nth-child(#{$i}) {
+          left: ($i - 1) * $percent;
+          $lineColor: lighten($primary, random(20));
+          background-image: linear-gradient(to bottom, rgba($lineColor, 0), rgba($lineColor, .75));
+          animation-delay: random($total) * calc($time/$total) * -1s;
+
+          &:after {
+            background: $lineColor;
+          }
+        }
+      }
+
+      @keyframes drop {
+        80% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate3d(0, 150vh, 0);
+          opacity: 0;
+        }
       }
     }
   }

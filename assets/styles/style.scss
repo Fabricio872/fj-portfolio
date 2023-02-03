@@ -1,13 +1,89 @@
-
 $color-primary: #0D1F2D;
 $color-secondary: #546A7B;
 $text-color: lighten($color-secondary, 30);
+$primary: $color-primary;
 
 @import "~bootstrap/scss/bootstrap";
 @import "app";
 
-#footer{
-  div{
+body {
+  font-family: monospace;
+}
+
+@media (min-width: 768px) {
+  body{
+    margin-left: 0;
+    transition: 0.3s ease-in-out;
+  }
+  .navbar-expanded{
+    margin-left: 399px;
+  }
+}
+
+#navbar {
+  .offcanvas{
+    background-color: $color-secondary;
+  }
+
+  .ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+  }
+
+  .hamRotate.active {
+    transform: rotate(45deg);
+  }
+
+  .hamRotate180.active {
+    transform: rotate(180deg);
+  }
+
+  .line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: $color-primary;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+  }
+
+  .ham3 .top {
+    stroke-dasharray: 40 130;
+  }
+
+  .ham3 .middle {
+    stroke-dasharray: 40 140;
+  }
+
+  .ham3 .bottom {
+    stroke-dasharray: 40 205;
+  }
+
+  .ham3.active .top {
+    stroke-dasharray: 75 130;
+    stroke-dashoffset: -63px;
+  }
+
+  .ham3.active .middle {
+    stroke-dashoffset: -102px;
+  }
+
+  .ham3.active .bottom {
+    stroke-dasharray: 110 205;
+    stroke-dashoffset: -86px;
+  }
+}
+
+#footer {
+  div {
     background-color: $color-primary;
   }
 }

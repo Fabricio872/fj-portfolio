@@ -1,7 +1,10 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    {% include 'app/header.html.twig' %}
-    {% include 'navbar.html.twig' %}
-    {% include 'footer.html.twig' %}
+    <div id="app" data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-smooth-scroll="true" tabindex="0">
+        {% include 'navbar.html.twig' %}
+        {% include 'app/header.html.twig' %}
+        {% include 'app/web-projects.html.twig' %}
+        {% include 'footer.html.twig' %}
+    </div>
 {% endblock %}

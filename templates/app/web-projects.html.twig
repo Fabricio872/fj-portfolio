@@ -1,0 +1,21 @@
+<turbo-frame id="app-web">
+    <div id="web">
+        <div class="background">
+            {% for i in range(0, 144) %}
+                <div class='c'></div>
+            {% endfor %}
+        </div>
+
+        <h1 class="text-center my-5">{{ "app.web-projects.title" }}</h1>
+
+        <div class="container my-3 d-flex flex-wrap justify-content-evenly">
+            <a href="#" class="card m-1" style="width: 18rem;">
+                <div class="image" style="background: red"></div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text"></p>
+                </div>
+            </a>
+        </div>
+    </div>
+</turbo-frame>
