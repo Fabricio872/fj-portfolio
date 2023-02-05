@@ -2,71 +2,65 @@
 #app {
   scroll-snap-type: both mandatory;
 
-  turbo-frame {
+  .page-container {
     scroll-snap-align: center;
-
-    div {
-      position: relative;
-    }
+    position: relative;
   }
 
-  #app-header {
+  #header {
+    overflow: hidden;
+    height: 100vh;
 
-    #head {
-      overflow: hidden;
-      height: 100vh;
+    .bg {
+      animation: slide 3s ease-in-out infinite alternate;
+      background-image: linear-gradient(-60deg, $color-primary 50%, $color-secondary 50%);
+      bottom: 0;
+      left: -50%;
+      opacity: .5;
+      position: absolute;
+      right: -50%;
+      top: 0;
+      z-index: -1;
+    }
 
-      .bg {
-        animation: slide 3s ease-in-out infinite alternate;
-        background-image: linear-gradient(-60deg, $color-primary 50%, $color-secondary 50%);
-        bottom: 0;
-        left: -50%;
-        opacity: .5;
-        position: absolute;
-        right: -50%;
-        top: 0;
-        z-index: -1;
+    .bg2 {
+      animation-direction: alternate-reverse;
+      animation-duration: 4s;
+    }
+
+    .bg3 {
+      animation-duration: 5s;
+    }
+
+    .content {
+      background-color: rgba($color-primary, .75);
+      border-radius: $border-radius;
+      box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
+      box-sizing: border-box;
+      left: 50%;
+      padding: 3vmin;
+      position: absolute;
+      text-align: center;
+      color: $text-color;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      height: auto;
+      width: calc(100% - 15em);
+      max-width: 50em;
+      min-width: 20em;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(-25%);
       }
-
-      .bg2 {
-        animation-direction: alternate-reverse;
-        animation-duration: 4s;
-      }
-
-      .bg3 {
-        animation-duration: 5s;
-      }
-
-      .content {
-        background-color: rgba($color-primary, .75);
-        border-radius: $border-radius;
-        box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
-        box-sizing: border-box;
-        left: 50%;
-        padding: 3vmin;
-        position: absolute;
-        text-align: center;
-        color: $text-color;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        height: auto;
-        width: calc(100% - 15em);
-        max-width: 50em;
-        min-width: 20em;
-      }
-
-      @keyframes slide {
-        0% {
-          transform: translateX(-25%);
-        }
-        100% {
-          transform: translateX(25%);
-        }
+      100% {
+        transform: translateX(25%);
       }
     }
   }
 
-  #app-web {
+  #web {
 
     .card {
       background-color: rgba($color-primary, .75);
@@ -81,7 +75,7 @@
       transform: scale(1.1);
     }
 
-    .image{
+    .image {
       width: 100%;
       height: 150px;
     }
@@ -163,4 +157,5 @@
       }
     }
   }
+
 }

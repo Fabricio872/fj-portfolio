@@ -15,27 +15,20 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-         return $this->redirect($adminUrlGenerator->setController(WebProjectCrudController::class)->generateUrl());
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(WebProjectCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            // the name visible to end users
             ->setTitle('Fabricio Jakubec - portfolio')
-
-            ->generateRelativeUrls()
-
-            ->setLocales(['en'])
-            ->setLocales([
-                'en', // locale without custom options
-            ])
-            ;
+            ->generateRelativeUrls();
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('The Label', 'fas fa-list', WebProject::class);
+        yield MenuItem::linkToCrud('Web Projects', 'fas fa-list', WebProject::class);
+        yield MenuItem::linkToRoute('User View', 'fas fa-list', 'app.index');
     }
 }

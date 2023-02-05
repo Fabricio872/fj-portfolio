@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\TranslationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Locale;
 
 #[ORM\Entity(repositoryClass: TranslationRepository::class)]
 class Translation
@@ -19,6 +21,17 @@ class Translation
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $en = null;
+
+    public function __toString(): string
+    {
+        $locale = Locale::getDefault();
+
+        if (!isset($this->$locale)) {
+            throw new Exception(sprintf('Not found locale "%s"', $locale));
+        }
+
+        return $this->$locale;
+    }
 
     public function getId(): ?int
     {
