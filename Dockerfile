@@ -52,6 +52,7 @@ RUN set -eux; \
     	zip \
     	apcu \
 		opcache \
+		gd \
     ;
 
 ###> recipes ###
