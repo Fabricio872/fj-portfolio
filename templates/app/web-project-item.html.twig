@@ -1,21 +1,14 @@
-<turbo-frame id="web-project-{{ webProject.id }}" {% if image is not defined %}src="{{ path('app.index') }}" {% endif %}>
-    <div class="container my-3 d-flex flex-wrap justify-content-evenly">
-        <a href="{{ webProject.url }}" class="card m-1" style="width: 18rem;">
-            {% if image is defined %}
-                <div class="image" style="background-image: url('data:image/png;base64,{{ image }}')"></div>
-            {% else %}
-                <div class="image position-relative">
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            <div class="card-body">
-                <h5 class="card-title">{{ webProject.title }}</h5>
-                <p class="card-text">{{ webProject.description }}</p>
+<a href="{{ webProject.url }}" target="_blank" class="card m-1" style="width: 18rem">
+    <div class="image position-relative"
+         style="background-image: url('{{ path('image.web-project', {'id': webProject.id}) }}')">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-        </a>
+        </div>
     </div>
-</turbo-frame>
+    <div class="card-body">
+        <h5 class="card-title">{{ webProject.title }}</h5>
+        <p class="card-text">{{ webProject.description }}</p>
+    </div>
+</a>

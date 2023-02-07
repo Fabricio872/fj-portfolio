@@ -11,9 +11,8 @@ class SeleniumImageTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        $this->assertSame('test', $kernel->getEnvironment());
-        $parameterBag = static::getContainer()->get('parameter_bag');
-        $seleniumImage = new SeleniumImage($parameterBag);
+        $container = static::getContainer();
+        $seleniumImage = $container->get(SeleniumImage::class);
 
         $data = $seleniumImage->getImageFromUrl('https://www.google.com/');
         $imagePath = tempnam(sys_get_temp_dir(), 'test-image-');
@@ -26,9 +25,8 @@ class SeleniumImageTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        $this->assertSame('test', $kernel->getEnvironment());
-        $parameterBag = static::getContainer()->get('parameter_bag');
-        $seleniumImage = new SeleniumImage($parameterBag);
+        $container = static::getContainer();
+        $seleniumImage = $container->get(SeleniumImage::class);
 
         $imagePath = tempnam(sys_get_temp_dir(), 'test-image-');
         $seleniumImage->getImageFromUrl('https://www.google.com/', $imagePath);

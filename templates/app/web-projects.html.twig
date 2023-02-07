@@ -5,9 +5,15 @@
         {% endfor %}
     </div>
 
-    <h1 class="text-center my-5">{{ "app.web-projects.title" }}</h1>
+    <h1 class="text-center my-5">{{ "app.web-projects.title"|trans }}</h1>
 
-    {% for webProject in webProjects %}
-        {% include 'app/web-project-item.html.twig' with {'webProject':webProject} %}
-    {% endfor %}
+    <div class="container content-block">
+        <p>{{ "app.web-projects.description"|trans }}</p>
+    </div>
+
+    <div class="justify-content-evenly my-3 flex-wrap d-flex">
+        {% for webProject in webProjects %}
+            {% include 'app/web-project-item.html.twig' with {'webProject':webProject} %}
+        {% endfor %}
+    </div>
 </div>

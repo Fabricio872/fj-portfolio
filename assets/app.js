@@ -45,3 +45,16 @@ $(document).ready(function () {
         $("body").addClass("navbar-expanded");
     });
 });
+
+$(window).on('resize', function() {
+    let isSmallWindow = $(this).width() < 768;
+    if(isSmallWindow) {
+        $("#navbar-button").removeClass("active");
+        $("#offcanvas-navbar").removeClass("show");
+        $("body").addClass("navbar-expanded");
+    }else {
+        $("#navbar-button").addClass("active");
+        $("#offcanvas-navbar").addClass("show");
+        $("body").addClass("navbar-expanded");
+    }
+});
