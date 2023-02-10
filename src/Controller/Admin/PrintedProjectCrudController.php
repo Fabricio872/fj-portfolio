@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\PrintedProject;
@@ -20,10 +22,12 @@ class PrintedProjectCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             AssociationField::new('title')->renderAsEmbeddedForm(
-                TranslationTextCrudController::class, 'Title'
+                TranslationTextCrudController::class,
+                'Title'
             ),
             AssociationField::new('description')->renderAsEmbeddedForm(
-                TranslationTextareaCrudController::class, 'Description'
+                TranslationTextareaCrudController::class,
+                'Description'
             ),
             ImageField::new('imagePath', 'Image')->setUploadDir('/var/data')->setBasePath('/image/storage/printed/')
         ];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use Exception;
@@ -18,10 +20,10 @@ class ImageOptimizer
 
     public function resize(?string $image, int $width, int $height = -1): string
     {
-        if (!$image) {
+        if (! $image) {
             throw new Exception("No image data provided");
         }
-        [$iwidth, $iheight] = (array)getimagesizefromstring($image);
+        [$iwidth, $iheight] = (array) getimagesizefromstring($image);
         $ratio = $iwidth / $iheight;
         if ($width / $height > $ratio) {
             $width = $height * $ratio;
@@ -30,9 +32,8 @@ class ImageOptimizer
         }
 
         $photo = $this->imagine->load($image);
-        return $photo->resize(new Box($width, (int)$height))->get('jpeg');
+        return $photo->resize(new Box($width, (int) $height))->get('jpeg');
     }
-
 
     /**
      * @return mixed

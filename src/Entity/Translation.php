@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\TranslationRepository;
@@ -7,9 +9,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Locale;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: TranslationRepository::class)]
-class Translation
+class Translation implements Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,20 +20,20 @@ class Translation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $sk = null;
+    private string $sk;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $en = null;
+    private string $en;
 
     public function __toString(): string
     {
         $locale = Locale::getDefault();
 
-        if (!isset($this->$locale)) {
+        if (! isset($this->$locale)) {
             throw new Exception(sprintf('Not found locale "%s"', $locale));
         }
 
-        return $this->$locale;
+        return (string) $this->$locale;
     }
 
     public function getId(): ?int
@@ -38,7 +41,7 @@ class Translation
         return $this->id;
     }
 
-    public function getSk(): ?string
+    public function getSk(): string
     {
         return $this->sk;
     }
@@ -50,7 +53,7 @@ class Translation
         return $this;
     }
 
-    public function getEn(): ?string
+    public function getEn(): string
     {
         return $this->en;
     }

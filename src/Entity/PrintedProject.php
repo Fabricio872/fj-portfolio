@@ -1,35 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
+use AllowDynamicProperties;
 use App\Repository\PrintedProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[AllowDynamicProperties]
 #[ORM\Entity(repositoryClass: PrintedProjectRepository::class)]
 class PrintedProject
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Translation $title = null;
+    private Translation $title;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Translation $description = null;
+    private Translation $description;
 
     #[ORM\Column(length: 255)]
-    private ?string $imagePath = null;
-
-    public function __construct()
-    {
-        $this->image = new ArrayCollection();
-    }
+    private string $imagePath;
 
     public function getId(): ?int
     {
@@ -67,7 +64,7 @@ class PrintedProject
 
     public function setImagePath(?string $imagePath): self
     {
-        $this->imagePath = $imagePath;
+        $this->imagePath = (string) $imagePath;
 
         return $this;
     }

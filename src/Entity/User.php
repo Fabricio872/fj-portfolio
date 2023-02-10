@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -15,20 +17,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 180, unique: true)]
     #[RegisterCommand(
         field: "string",
         userIdentifier: true
     )]
-    private ?string $username = null;
+    private string $username;
 
+    /**
+     * @var array<int, string> $roles
+     */
     #[ORM\Column]
     #[RegisterCommand(
         valueArray: ["ROLE_ADMIN"]
     )]
-    private array $roles = [];
+    private array $roles;
 
     /**
      * @var string The hashed password
@@ -37,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[RegisterCommand(
         field: "password"
     )]
-    private ?string $password = null;
+    private string $password;
 
     public function getId(): ?int
     {
@@ -78,6 +83,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array<int, string> $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -103,7 +112,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;

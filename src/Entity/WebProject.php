@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\WebProjectRepository;
@@ -15,21 +17,21 @@ class WebProject
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Translation $title = null;
+    private Translation $title;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Translation $description = null;
+    private Translation $description;
 
     #[ORM\Column(length: 255)]
-    private ?string $url = null;
+    private string $url;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?Translation
+    public function getTitle(): Translation
     {
         return $this->title;
     }
@@ -41,7 +43,7 @@ class WebProject
         return $this;
     }
 
-    public function getDescription(): ?Translation
+    public function getDescription(): Translation
     {
         return $this->description;
     }
@@ -53,7 +55,7 @@ class WebProject
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getUrl(): string
     {
         return $this->url;
     }

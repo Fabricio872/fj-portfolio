@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\WebProject;
@@ -38,10 +40,12 @@ class WebProjectCrudController extends AbstractCrudController
         return [
             UrlField::new('url'),
             AssociationField::new('title')->renderAsEmbeddedForm(
-                TranslationTextCrudController::class, 'Title'
+                TranslationTextCrudController::class,
+                'Title'
             ),
             AssociationField::new('description')->renderAsEmbeddedForm(
-                TranslationTextareaCrudController::class, 'Description'
+                TranslationTextareaCrudController::class,
+                'Description'
             ),
         ];
     }
