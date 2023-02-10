@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\EasyAdminFields\TextTranslationField;
 use App\Entity\WebProject;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;

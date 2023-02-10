@@ -11,7 +11,8 @@
         <p>{{ "app.web-projects.description"|trans }}</p>
     </div>
 
-    <div class="justify-content-evenly my-3 flex-wrap d-flex">
+    <div class="container justify-content-evenly my-3 flex-wrap d-flex">
+
         {% for webProject in webProjects %}
             {% include 'app/web-project-item.html.twig' with {'webProject':webProject} %}
         {% endfor %}

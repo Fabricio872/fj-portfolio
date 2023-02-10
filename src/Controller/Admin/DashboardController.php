@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\PrintedProject;
 use App\Entity\WebProject;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -29,6 +30,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud('Web Projects', 'fas fa-list', WebProject::class);
+        yield MenuItem::linkToCrud('Printed Projects', 'fas fa-list', PrintedProject::class);
         yield MenuItem::linkToRoute('User View', 'fas fa-list', 'app.index');
     }
 }

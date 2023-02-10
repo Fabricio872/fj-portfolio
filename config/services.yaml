@@ -6,6 +6,7 @@
 parameters:
     seleniumUrl: '%env(resolve:SELENIUM_URL)%'
     webProjectImageWidth: '%env(resolve:WEB_PROJECT_IMAGE_WIDTH)%'
+    printedProjectImageWidth: '%env(resolve:PRINTED_PROJECT_IMAGE_WIDTH)%'
     noImage: '%kernel.project_dir%/assets/images/no-image.jpg'
 
 services:

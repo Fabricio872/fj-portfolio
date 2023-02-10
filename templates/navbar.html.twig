@@ -22,12 +22,22 @@
                 <ul class="nav flex-column">
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#app-header">{{ 'navbar.item.header'|trans }}</a>
+                           href="#header">{{ 'navbar.item.header'|trans }}</a>
                     </li>
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#app-web">{{ 'navbar.item.web'|trans }}</a>
+                           href="#web">{{ 'navbar.item.web'|trans }}</a>
                     </li>
+                    <li class="nav-item m-1">
+                        <a class="nav-link btn"
+                           href="#printed">{{ 'navbar.item.printed'|trans }}</a>
+                    </li>
+                    {% if app.user %}
+                    <li class="nav-item m-1">
+                        <a class="nav-link btn"
+                           href="{{ path('logout') }}">{{ 'navbar.item.logout'|trans }}</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </nav>
             <ul class="nav fixed-bottom m-3">

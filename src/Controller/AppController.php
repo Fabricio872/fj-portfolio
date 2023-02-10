@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\PrintedProject;
 use App\Entity\WebProject;
 use Carbon\Carbon;
 use DateTime;
@@ -22,8 +23,8 @@ class AppController extends AbstractController
 
         return $this->render('app/index.html.twig', [
             'symfonyInterval' => $startDate->longRelativeToNowDiffForHumans(parts: 5),
-            'webProjects' => $em->getRepository(WebProject::class)->findAll()
+            'webProjects' => $em->getRepository(WebProject::class)->findAll(),
+            'printedProjects' => $em->getRepository(PrintedProject::class)->findAll()
         ]);
     }
-
 }

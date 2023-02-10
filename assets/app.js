@@ -46,15 +46,22 @@ $(document).ready(function () {
     });
 });
 
-$(window).on('resize', function() {
+$(window).on('resize', function () {
     let isSmallWindow = $(this).width() < 768;
-    if(isSmallWindow) {
+    navbar(isSmallWindow);
+});
+
+let isSmallWindow = $(this).width() < 768;
+navbar(isSmallWindow);
+
+function navbar(open) {
+    if (open) {
         $("#navbar-button").removeClass("active");
         $("#offcanvas-navbar").removeClass("show");
         $("body").addClass("navbar-expanded");
-    }else {
+    } else {
         $("#navbar-button").addClass("active");
         $("#offcanvas-navbar").addClass("show");
         $("body").addClass("navbar-expanded");
     }
-});
+}
