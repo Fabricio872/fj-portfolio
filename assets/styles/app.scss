@@ -1,4 +1,15 @@
 
+
+.markdown {
+  p{
+    a {
+      color: $text-color !important;
+      text-decoration: underline;
+    }
+  }
+
+}
+
 #app {
   scroll-snap-type: both mandatory;
 

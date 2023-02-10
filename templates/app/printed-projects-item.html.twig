@@ -5,9 +5,9 @@
                  class="img-fluid rounded-start" alt="{{ printedProject.imagePath }}">
         </div>
         <div class="col-md-8">
-            <div class="card-body">
+            <div class="card-body markdown">
                 <h5 class="card-title">{{ printedProject.title }}</h5>
-                <p class="card-text">{{ printedProject.description }}</p>
+                <p class="card-text">{{ printedProject.description|markdown_to_html }}</p>
             </div>
         </div>
     </div>

@@ -11,17 +11,17 @@ body {
 }
 
 @media (min-width: 768px) {
-  body{
+  body {
     margin-left: 0;
     transition: 0.3s ease-in-out;
   }
-  .navbar-expanded{
+  .navbar-expanded {
     margin-left: 399px;
   }
 }
 
 #navbar {
-  .offcanvas{
+  .offcanvas {
     background-color: $color-secondary;
   }
 
