@@ -1,0 +1,7 @@
+parameters:
+	level: 8
+	paths:
+		- src
+	doctrine:
+		objectManagerLoader: tests/object-manager.php
+

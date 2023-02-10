@@ -1,0 +1,20 @@
+<div id="web" class="page-container">
+    <div class="background">
+        {% for i in range(0, 144) %}
+            <div class='c'></div>
+        {% endfor %}
+    </div>
+
+    <h1 class="text-center my-5">{{ "app.web-projects.title"|trans }}</h1>
+
+    <div class="container content-block">
+        <p>{{ "app.web-projects.description"|trans }}</p>
+    </div>
+
+    <div class="container justify-content-evenly my-3 flex-wrap d-flex">
+
+        {% for webProject in webProjects %}
+            {% include 'app/web-project-item.html.twig' with {'webProject':webProject} %}
+        {% endfor %}
+    </div>
+</div>

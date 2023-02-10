@@ -1,0 +1,14 @@
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ path('image.uploaded',{'size':'printed', 'imageName':printedProject.imagePath}) }}"
+                 class="img-fluid rounded-start" alt="{{ printedProject.imagePath }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body markdown">
+                <h5 class="card-title">{{ printedProject.title }}</h5>
+                <p class="card-text">{{ printedProject.description|markdown_to_html }}</p>
+            </div>
+        </div>
+    </div>
+</div>

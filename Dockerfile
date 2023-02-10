@@ -43,6 +43,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		yarn \
 	;
 
 RUN set -eux; \
@@ -51,9 +52,16 @@ RUN set -eux; \
     	zip \
     	apcu \
 		opcache \
+		gd \
     ;
 
 ###> recipes ###
+###> doctrine/doctrine-bundle ###
+RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
+	docker-php-ext-install -j$(nproc) pdo_pgsql; \
+	apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5; \
+	apk del .pgsql-deps
+###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -117,6 +125,11 @@ RUN set -eux; \
 	install-php-extensions xdebug
 
 RUN rm -f .env.local.php
+
+RUN apk add --no-cache \
+		bash \
+		bash-completion \
+	;
 
 # Caddy image
 FROM caddy:2.6-alpine AS app_caddy
