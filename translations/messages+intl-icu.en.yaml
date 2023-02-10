@@ -3,6 +3,17 @@ title: __title
 app:
     header:
         title: __app.header.title
-        content: "%work%"
+        content: '%work%'
+    web-projects:
+        title: __app.web-projects.title
+        description: __app.web-projects.description
+    printed-projects:
+        title: __app.printed-projects.title
+        description: __app.printed-projects.description
 navbar:
     title: __navbar.title
+    item:
+        header: __navbar.item.header
+        web: __navbar.item.web
+        printed: __navbar.item.printed
+navbarLabel: __navbarLabel

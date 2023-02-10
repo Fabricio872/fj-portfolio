@@ -1,8 +1,19 @@
 lang: sk
-title: "Fabricio Jakubec - portfolio"
+title: 'Fabricio Jakubec - portfolio'
 app:
     header:
-        title: "Fabricio Jakubec - portfolio"
-        content: "Programovanie nieje len mojou profesiou, ale aj záľubou. Môj primárny jazyk je PHP a najčastejšie pracujem vo frameworku Symfony v ktorom som začal pracovat asi {symfony_interval} a stale ma to baví."
+        title: 'Fabricio Jakubec - portfolio'
+        content: 'Programovanie nieje len mojou profesiou, ale aj záľubou. Môj primárny jazyk je PHP a najčastejšie pracujem vo frameworku Symfony v ktorom som začal pracovat asi {symfony_interval} a stale ma to baví.'
+    web-projects:
+        title: __app.web-projects.title
+        description: __app.web-projects.description
+    printed-projects:
+        title: __app.printed-projects.title
+        description: __app.printed-projects.description
 navbar:
     title: __navbar.title
+    item:
+        header: __navbar.item.header
+        web: __navbar.item.web
+        printed: __navbar.item.printed
+navbarLabel: __navbarLabel
