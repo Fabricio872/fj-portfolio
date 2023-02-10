@@ -40,7 +40,8 @@
     "config": {
         "allow-plugins": {
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
@@ -73,7 +74,21 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "cs": [
+            "@ecs",
+            "@rector",
+            "@phpstan"
+        ],
+        "cs-fix": [
+            "@ecs-fix",
+            "@rector-fix"
+        ],
+        "ecs": "vendor/bin/ecs check",
+        "ecs-fix": "vendor/bin/ecs check --fix",
+        "rector": "vendor/bin/rector process --dry-run",
+        "rector-fix": "vendor/bin/rector process",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -86,13 +101,17 @@
         }
     },
     "require-dev": {
+        "phpstan/extension-installer": "^1.2",
+        "phpstan/phpstan-doctrine": "^1.3",
         "phpunit/phpunit": "^10.0",
+        "rector/rector": "*",
         "symfony/browser-kit": "6.2.*",
         "symfony/css-selector": "6.2.*",
         "symfony/debug-bundle": "6.2.*",
         "symfony/maker-bundle": "^1.48",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "6.2.*",
-        "symfony/web-profiler-bundle": "6.2.*"
+        "symfony/web-profiler-bundle": "6.2.*",
+        "symplify/easy-coding-standard": "^11.2"
     }
 }
