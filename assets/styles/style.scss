@@ -10,6 +10,34 @@ body {
   font-family: monospace;
 }
 
+#spiderman-easteregg {
+  position: fixed;
+  bottom: -500px;
+  z-index: 10000;
+  animation-name: example;
+  animation-duration: 8s;
+
+  @keyframes example {
+    0% {
+      bottom: -500px;
+    }
+    25% {
+      bottom: 0;
+    }
+    75% {
+      bottom: 0;
+    }
+    100% {
+      bottom: -500px;
+    }
+  }
+
+  img {
+    max-width: 500px;
+    width: 100%;
+  }
+}
+
 @media (min-width: 768px) {
   body {
     margin-left: 0;

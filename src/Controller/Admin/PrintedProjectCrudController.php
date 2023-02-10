@@ -25,7 +25,7 @@ class PrintedProjectCrudController extends AbstractCrudController
             AssociationField::new('description')->renderAsEmbeddedForm(
                 TranslationTextareaCrudController::class, 'Description'
             ),
-            ImageField::new('imagePath', 'Image')->setUploadDir('/var/data')->setBasePath('/image/storage/printed/')->hideWhenUpdating()
+            ImageField::new('imagePath', 'Image')->setUploadDir('/var/data')->setBasePath('/image/storage/printed/')
         ];
     }
 }

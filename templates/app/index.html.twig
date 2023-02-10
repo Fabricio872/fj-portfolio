@@ -1,8 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
+    {% include 'navbar.html.twig' %}
+    {% if fromReferer %}
+        <div id="spiderman-easteregg">
+            <img src="{{ asset('images/spiderman_easteregg.png') }}" alt="spidermans pointing at each other">
+        </div>
+    {% endif %}
     <div id="app" data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-smooth-scroll="true" tabindex="0">
-        {% include 'navbar.html.twig' %}
         {% include 'app/header.html.twig' %}
         {% include 'app/web-projects.html.twig' %}
         {% include 'app/printed-projects.html.twig' %}

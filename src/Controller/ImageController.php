@@ -63,7 +63,7 @@ class ImageController extends AbstractController
             throw $this->createNotFoundException("You cannot access resource outside $host");
         }
         if (!file_exists($imagePath)) {
-            throw $this->createNotFoundException(sprintf("Image %s Not Found.", $imagePath));
+            throw $this->createNotFoundException(sprintf("Image %s Not Found.", $imageName));
         }
 
         if ($size == 'original') {
