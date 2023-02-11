@@ -70,11 +70,14 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@yarn"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@yarn"
         ],
+        "yarn": "yarn; yarn install",
         "cs": [
             "@ecs",
             "@rector",
