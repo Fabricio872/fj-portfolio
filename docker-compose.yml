@@ -75,9 +75,6 @@ services:
   firefox:
     image: selenium/standalone-firefox:latest
     shm_size: "2g"
-    ports:
-      - "4444:4444"
-      - "7900:7900"
 
 volumes:
   php_socket:
