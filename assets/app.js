@@ -43,7 +43,7 @@ $(window).on('resize', function () {
     navbar(isSmallWindow);
 });
 
-let isSmallWindow = $(this).width() < 768;
+let isSmallWindow = $(document).width() < 768;
 navbar(isSmallWindow);
 
 function navbar(open) {
