@@ -2,7 +2,7 @@
 
 {% block body %}
     {% include 'navbar.html.twig' %}
-    {% if fromReferer %}
+    {% if app.session.flashbag.get('spiderman-easteregg') %}
         <div id="spiderman-easteregg">
             <img src="{{ asset('images/spiderman_easteregg.png') }}" alt="spidermans pointing at each other">
         </div>
