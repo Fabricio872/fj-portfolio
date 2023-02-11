@@ -77,7 +77,7 @@
             "@auto-scripts",
             "@yarn"
         ],
-        "yarn": "yarn; yarn install",
+        "yarn": "yarn; yarn encore production",
         "cs": [
             "@ecs",
             "@rector",
