@@ -4,6 +4,8 @@ $text-color: lighten($color-secondary, 30);
 $primary: $color-primary;
 
 @import "~bootstrap/scss/bootstrap";
+$bootstrap-icons-font-dir: "~bootstrap-icons/font/fonts";
+@import "~bootstrap-icons/font/bootstrap-icons.scss";
 @import "app";
 
 body {

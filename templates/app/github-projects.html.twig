@@ -1,0 +1,20 @@
+<div id="github" class="page-container">
+    <div class="background">
+        {% for i in range(0, 144) %}
+            <div class='c'></div>
+        {% endfor %}
+    </div>
+
+    <h1 class="text-center my-5">{{ "app.github-projects.title"|trans }}</h1>
+
+    <div class="container content-block">
+        <p>{{ "app.github-projects.description"|trans }}</p>
+    </div>
+
+    <div class="container justify-content-evenly my-3 flex-wrap d-flex">
+
+        {% for githubProject in githubProjects %}
+            {% include 'app/github-project-item.html.twig' with {'githubproject':githubProject} %}
+        {% endfor %}
+    </div>
+</div>
