@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="{{ path('image.uploaded',{'size':'printed', 'imageName':printedProject.imagePath}) }}"
+            <img loading="lazy" src="{{ path('image.uploaded',{'size':'printed', 'imageName':printedProject.imagePath}) }}"
                  class="img-fluid rounded-start" alt="{{ printedProject.imagePath }}">
         </div>
         <div class="col-md-8">

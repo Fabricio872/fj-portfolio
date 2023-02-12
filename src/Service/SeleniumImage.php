@@ -32,6 +32,7 @@ class SeleniumImage
             $driver = RemoteWebDriver::create($selenuimUrl, DesiredCapabilities::firefox());
 
             $driver->get($url);
+            $driver->wait(10);
             sleep(5);
             $data = $driver->takeScreenshot($fileName);
             $driver->quit();
