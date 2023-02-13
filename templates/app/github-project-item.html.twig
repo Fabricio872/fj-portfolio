@@ -1,10 +1,15 @@
-<a href="{{ githubProject.url }}" target="_blank" class="card m-2" style="width: 18rem">
+<a href="{{ githubProject.htmlUrl }}" target="_blank" class="card m-2" style="width: 18rem">
     <div class="card-body">
 
-        <h5 class="card-title"><img src="{{ asset('images/github-mark-white.svg') }}" style="width: 32px" alt=""> {{ githubProject.title }}</h5>
+        <h5 class="card-title">
+            <img src="{{ asset('images/github-mark-white.svg') }}" style="width: 32px" alt="">
+            {{ githubProject.name }}
+            {% if githubProject.stargazersCount %}
+                <span class="badge bg-primary float-end"><i class="bi bi-star"></i> {{ githubProject.stargazersCount }}</span>
+            {% endif %}
+        </h5>
         <p class="card-text">{{ githubProject.description }}</p>
-        {% if githubProject.stars %}
-        <span class="badge bg-primary float-end"><i class="bi bi-star"></i> {{ githubProject.stars }}</span>
-        {% endif %}
+        <p class="card-text text-secondary position-absolute bottom-0">{{ githubProject.pushedAt|date() }}</p>
+
     </div>
 </a>

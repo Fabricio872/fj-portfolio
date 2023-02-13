@@ -6,19 +6,22 @@ namespace App\Controller;
 
 use App\Entity\PrintedProject;
 use App\Entity\WebProject;
+use App\Model\GithubRepo;
 use App\Service\GithubReader;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -26,19 +29,19 @@ use Symfony\Contracts\Cache\ItemInterface;
 class AppController extends AbstractController
 {
     public function __construct(
-        private readonly GithubReader          $githubReader,
-        private readonly CacheInterface        $cache,
-        private readonly ParameterBagInterface $parameterBag
-    )
-    {
+        private readonly GithubReader $githubReader,
+        private readonly CacheInterface $cache,
+        private readonly ParameterBagInterface $parameterBag,
+        private readonly DenormalizerInterface $denormalizer
+    ) {
     }
 
     #[Route('/', name: 'index')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         Carbon::setLocale($request->getLocale());
-        $startDate = Carbon::create(new DateTime($this->parameterBag->get('symfonyStartDate')));
-        if (!$startDate) {
+        $startDate = Carbon::create(new DateTime(strval($this->parameterBag->get('symfonyStartDate'))));
+        if (! $startDate) {
             throw new Exception("Wrong Start date provided");
         }
 
@@ -57,27 +60,23 @@ class AppController extends AbstractController
         return $this->redirectToRoute('app.index');
     }
 
+    /**
+     * @return array<int, GithubRepo>
+     * @throws ExceptionInterface|InvalidArgumentException
+     */
     private function getGithubItems(): array
     {
-        $repos = $this->cache->get('github_items', function (ItemInterface $item) {
-            $item->expiresAfter(DateInterval::createFromDateString('1 month'));
-            return $this->githubReader->listRepositories();
-        });
-        uasort($repos, function ($a, $b) {
-            return new DateTime($a['pushed_at']) < new DateTime($b['pushed_at']);
-        });
+        /** @var array<int, GithubRepo> $repos */
+        $repos = $this->denormalizer->denormalize(
+            $this->cache->get('github_items', function (ItemInterface $item) {
+                $item->expiresAfter(DateInterval::createFromDateString('1 month'));
+                return $this->githubReader->listRepositories();
+            }),
+            GithubRepo::class . '[]'
+        );
 
-        $items = [];
-        foreach ($repos as $repository) {
-            if ($repository['description']) {
-                $items[] = [
-                    'url' => $repository['html_url'],
-                    'title' => $repository['name'],
-                    'description' => $repository['description'],
-                    'stars' => $repository['stargazers_count']
-                ];
-            }
-        }
-        return $items;
+        uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
+
+        return $repos;
     }
 }
