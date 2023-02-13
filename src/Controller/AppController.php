@@ -10,6 +10,7 @@ use App\Service\GithubReader;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,10 +26,11 @@ use Symfony\Contracts\Cache\ItemInterface;
 class AppController extends AbstractController
 {
     public function __construct(
-        private readonly GithubReader $githubReader,
-        private readonly CacheInterface $cache,
+        private readonly GithubReader          $githubReader,
+        private readonly CacheInterface        $cache,
         private readonly ParameterBagInterface $parameterBag
-    ) {
+    )
+    {
     }
 
     #[Route('/', name: 'index')]
@@ -36,7 +38,7 @@ class AppController extends AbstractController
     {
         Carbon::setLocale($request->getLocale());
         $startDate = Carbon::create(new DateTime($this->parameterBag->get('symfonyStartDate')));
-        if (! $startDate) {
+        if (!$startDate) {
             throw new Exception("Wrong Start date provided");
         }
 
@@ -57,20 +59,25 @@ class AppController extends AbstractController
 
     private function getGithubItems(): array
     {
-        return $this->cache->get('github_items', function (ItemInterface $item) {
+        $repos = $this->cache->get('github_items', function (ItemInterface $item) {
             $item->expiresAfter(DateInterval::createFromDateString('1 month'));
-            $items = [];
-            foreach ($this->githubReader->listRepositories() as $repository) {
-                if ($repository['description']) {
-                    $items[] = [
-                        'url' => $repository['name'],
-                        'title' => $repository['name'],
-                        'description' => $repository['description'],
-                        'stars' => $repository['stargazers_count']
-                    ];
-                }
-            }
-            return $items;
+            return $this->githubReader->listRepositories();
         });
+        uasort($repos, function ($a, $b) {
+            return new DateTime($a['pushed_at']) < new DateTime($b['pushed_at']);
+        });
+
+        $items = [];
+        foreach ($repos as $repository) {
+            if ($repository['description']) {
+                $items[] = [
+                    'url' => $repository['html_url'],
+                    'title' => $repository['name'],
+                    'description' => $repository['description'],
+                    'stars' => $repository['stargazers_count']
+                ];
+            }
+        }
+        return $items;
     }
 }
