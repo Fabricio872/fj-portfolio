@@ -5,26 +5,25 @@ app:
         title: 'Fabricio Jakubec - portfolio'
         content: 'Programovanie nieje len mojou profesiou, ale aj záľubou. Môj primárny jazyk je PHP a najčastejšie pracujem vo frameworku Symfony v ktorom som začal pracovat asi {symfony_interval} a stale ma to baví.'
     web-projects:
-        title: __app.web-projects.title
-        description: __app.web-projects.description
+        title: 'Webové projekty'
+        description: 'Toto sú webové projekty ktoré sú produkčne spustené a verejne prístupné.'
     printed-projects:
-        title: __app.printed-projects.title
-        description: __app.printed-projects.description
+        title: '3D vytlačené projekty'
+        description: 'Mojou ďalšou záľubou je navrhovanie a následná tlač 3D modelov navrhnutých v CAD softwary Fusion 360.'
     github-projects:
-        title: __app.github-projects.title
-        description: __app.github-projects.description
+        title: 'Všetky moje verejne prístupné prjekty čo mám na Githube'
+        description: 'Medzi tie zaujímavejšie projekty patrí RegisterCommandBundle čo je Symfony bundle ktorým je možné jednoducho vytvorit administráciu používateľou cez terminál. Alebo je tu link na repozitár už spomínaného krytu na 3D tlačiareň. Taktiež užitočné sú aj teamcity agent projekty ktoré využívam na deployment aj tohto projektu. Sú dva lebo jeden má PHP prostredie mozne zreplikovat scriptom v repozitary php-dev a druhý sa zas instaluje s docker integráciou.'
 navbar:
-    title: __navbar.title
+    title: 'Fabricio Jakubec - portfolio'
     item:
-        header: __navbar.item.header
-        web: __navbar.item.web
-        printed: __navbar.item.printed
-        github: __navbar.item.github
-navbarLabel: __navbarLabel
+        header: 'Hlavná stránka'
+        web: 'Webové projekty'
+        printed: '3D vytlačené projekty'
+        github: 'Môj github'
 footer:
-    title: __footer.title
-    description: __footer.description
+    title: 'Kontaktujte ma'
+    description: 'Neváhajte ma kontaktovat cez niektorú z tíchto platforiem.'
 contact:
     email: fabricio872@gmail.com
-    facebook: __contact.facebook
-    github: __contact.github
+    facebook: 'https://www.facebook.com/fabricio.jakubec/'
+    github: 'https://github.com/Fabricio872'
