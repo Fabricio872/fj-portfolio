@@ -1,13 +1,7 @@
 
-
-.markdown {
-  p{
-    a {
-      color: $text-color !important;
-      text-decoration: underline;
-    }
-  }
-
+.markdown * a {
+  color: $text-color !important;
+  text-decoration: underline;
 }
 
 #app {
