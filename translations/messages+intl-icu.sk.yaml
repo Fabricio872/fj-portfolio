@@ -12,7 +12,7 @@ app:
         description: 'Mojou ďalšou záľubou je navrhovanie a následná tlač 3D modelov navrhnutých v CAD softwary Fusion 360.'
     github-projects:
         title: 'Všetky moje verejne prístupné prjekty čo mám na Githube'
-        description: 'Medzi tie zaujímavejšie projekty patrí RegisterCommandBundle čo je Symfony bundle ktorým je možné jednoducho vytvorit administráciu používateľou cez terminál. Alebo je tu link na repozitár už spomínaného krytu na 3D tlačiareň. Taktiež užitočné sú aj teamcity agent projekty ktoré využívam na deployment aj tohto projektu. Sú dva lebo jeden má PHP prostredie mozne zreplikovat scriptom v repozitary php-dev a druhý sa zas instaluje s docker integráciou.'
+        description: 'Medzi tie zaujímavejšie projekty patrí RegisterCommandBundle čo je Symfony bundle ktorým je možné jednoducho vytvoriť administráciu používateľou cez terminál. Alebo je tu link na repozitár už spomínaného krytu na 3D tlačiareň. Taktiež užitočné sú aj teamcity agent projekty ktoré využívam na deployment aj tohto projektu. Sú dva lebo jeden má PHP prostredie mozne zreplikovat scriptom v repozitary php-dev a druhý sa zas instaluje s docker integráciou.'
 navbar:
     title: 'Fabricio Jakubec - portfolio'
     item:
