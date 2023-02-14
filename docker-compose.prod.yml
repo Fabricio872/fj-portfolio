@@ -5,6 +5,7 @@ services:
   php:
     environment:
       APP_SECRET: ${APP_SECRET}
+      GITHUB_USERNAME: ${GITHUB_USERNAME}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
 
   caddy:
