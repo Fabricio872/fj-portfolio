@@ -210,12 +210,6 @@
       color: $text-color;
       overflow: hidden;
       text-decoration: none;
-      cursor: pointer;
-      transition: .3s;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
     }
   }
 }
