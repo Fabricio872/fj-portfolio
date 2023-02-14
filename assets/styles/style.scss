@@ -113,7 +113,16 @@ body {
 }
 
 #footer {
-  div {
-    background-color: $color-primary;
+  color: $text-color;
+  background-color: $color-primary;
+
+  a{
+    color: $text-color;
+    font-size: 2em;
+    transition: .3s;
+  }
+
+  a:hover {
+    transform: scale(1.25);
   }
 }

@@ -36,9 +36,12 @@
                         <a class="nav-link btn"
                            href="#github">{{ 'navbar.item.github'|trans }}</a>
                     </li>
+                    <li class="nav-item m-1">
+                        {% include 'partials/contact_links.html.twig' %}
+                    </li>
                 </ul>
             </nav>
-            <ul class="nav fixed-bottom m-3">
+            <ul class="nav fixed-bottom position-absolute m-3">
                 <li class="nav-item w-auto m-1">
                     <a class="nav-link btn d-inline-block {{ app.request.locale == "sk"? "active btn-outline" }}"
                        href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale':'sk'})) }}">SK</a>

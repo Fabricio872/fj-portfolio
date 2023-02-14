@@ -10,10 +10,21 @@ app:
     printed-projects:
         title: __app.printed-projects.title
         description: __app.printed-projects.description
+    github-projects:
+        title: __app.github-projects.title
+        description: __app.github-projects.description
 navbar:
     title: __navbar.title
     item:
         header: __navbar.item.header
         web: __navbar.item.web
         printed: __navbar.item.printed
+        github: __navbar.item.github
 navbarLabel: __navbarLabel
+footer:
+    title: __footer.title
+    description: __footer.description
+contact:
+    email: fabricio872@gmail.com
+    facebook: __contact.facebook
+    github: __contact.github
