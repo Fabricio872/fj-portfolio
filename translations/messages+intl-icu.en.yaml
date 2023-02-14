@@ -27,3 +27,10 @@ contact:
     email: __contact.email
     facebook: __contact.facebook
     github: __contact.github
+meta:
+    title: __meta.title
+    description: __meta.description
+    og:
+        url: __meta.og.url
+        title: __meta.og.title
+        description: __meta.og.description
