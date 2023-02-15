@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use AllowDynamicProperties;
 use App\Repository\PrintedProjectRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[AllowDynamicProperties]
@@ -27,6 +28,14 @@ class PrintedProject
 
     #[ORM\Column(length: 255)]
     private string $imagePath;
+
+    #[ORM\Column]
+    private DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -65,6 +74,18 @@ class PrintedProject
     public function setImagePath(?string $imagePath): self
     {
         $this->imagePath = (string) $imagePath;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

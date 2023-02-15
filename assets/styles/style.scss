@@ -125,4 +125,15 @@ body {
   a:hover {
     transform: scale(1.25);
   }
+
+  .avatar{
+    position: relative;
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    padding-top: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }

@@ -2,8 +2,12 @@
     <div class="container pt-3">
         <div class="row">
             <div class="col">
-                <h1>{{ 'footer.title'|trans }}</h1>
+                <h2>{{ 'footer.title'|trans }}</h2>
                 <p>{{ 'footer.description'|trans }}</p>
+                <div class="mb-3" style="max-width: 200px">
+                    <div class="avatar"
+                         style="background-image: url('{{ asset('images/profile_picture.jpg') }}')"></div>
+                </div>
             </div>
             <div class="col">
                 {% include 'partials/contact_links.html.twig' %}
