@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\PrintedProject;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -19,17 +20,24 @@ class PrintedProjectCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            AssociationField::new('title')->renderAsEmbeddedForm(
-                TranslationTextCrudController::class,
-                'Title'
-            ),
-            AssociationField::new('description')->renderAsEmbeddedForm(
-                TranslationTextareaCrudController::class,
-                'Description'
-            ),
-            ImageField::new('imagePath', 'Image')->setUploadDir('/var/data')->setBasePath('/image/storage/printed/')
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield AssociationField::new('title')->renderAsEmbeddedForm(
+            TranslationTextCrudController::class,
+            'Title'
+        );
+        yield AssociationField::new('description')->renderAsEmbeddedForm(
+            TranslationTextareaCrudController::class,
+            'Description'
+        );
+        if (Crud::PAGE_EDIT === $pageName) {
+            yield ImageField::new('imagePath', 'Image')
+                ->setUploadDir('/var/data')
+                ->setBasePath('/image/storage/printed/')
+                ->setRequired(false);
+        } else {
+            yield ImageField::new('imagePath', 'Image')
+                ->setUploadDir('/var/data')
+                ->setBasePath('/image/storage/printed/');
+        }
     }
 }
