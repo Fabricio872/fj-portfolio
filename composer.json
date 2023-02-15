@@ -21,6 +21,7 @@
         "nesbot/carbon": "^2.66",
         "nyholm/psr7": "^1.5",
         "php-webdriver/webdriver": "^1.13",
+        "spatie/schema-org": "^3.14",
         "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
