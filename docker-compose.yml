@@ -66,6 +66,7 @@ services:
       # You should definitely change the password in production
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
       POSTGRES_USER: ${POSTGRES_USER:-app}
+    restart: unless-stopped
     volumes:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
@@ -75,6 +76,7 @@ services:
   firefox:
     image: selenium/standalone-firefox:latest
     shm_size: "2g"
+    restart: unless-stopped
 
 volumes:
   php_socket:
