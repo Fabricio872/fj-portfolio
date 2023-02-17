@@ -38,22 +38,23 @@ $(document).ready(function () {
     });
 });
 
-$(window).on('resize', function () {
+$('#navbar .nav-item').on('click', function () {
     let isSmallWindow = $(this).width() < 768;
+    if (isSmallWindow){
+        navbar(false);
+    }
+})
+
+$(document).ready(function () {
+    let isSmallWindow = $(document).width() > 768;
     navbar(isSmallWindow);
 });
 
-let isSmallWindow = $(document).width() < 768;
-navbar(isSmallWindow);
-
 function navbar(open) {
     if (open) {
-        $("#navbar-button").removeClass("active");
-        $("#offcanvas-navbar").removeClass("show");
-        $("body").addClass("navbar-expanded");
+        jQuery('#offcanvas-navbar').offcanvas('show');
+        console.log('show');
     } else {
-        $("#navbar-button").addClass("active");
-        $("#offcanvas-navbar").addClass("show");
-        $("body").addClass("navbar-expanded");
+        jQuery('#offcanvas-navbar').offcanvas('hide');
     }
 }
