@@ -39,7 +39,7 @@ $(document).ready(function () {
 });
 
 $('#navbar .nav-item').on('click', function () {
-    let isSmallWindow = $(this).width() < 768;
+    let isSmallWindow = $(document).width() < 768;
     if (isSmallWindow){
         navbar(false);
     }
