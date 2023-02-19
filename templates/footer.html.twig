@@ -6,7 +6,7 @@
                 <p>{{ 'footer.description'|trans }}</p>
                 <div class="mb-3" style="max-width: 200px">
                     <div class="avatar"
-                         style="background-image: url('{{ asset('images/profile_picture.jpg') }}')"></div>
+                         style="background-image: url('{{ path('image.asset', {'imageName': 'profile_picture.jpg', 'size': 'small'}) }}')"></div>
                 </div>
             </div>
             <div class="col">

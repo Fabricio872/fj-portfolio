@@ -44,7 +44,7 @@ class ImageController extends AbstractController
                     'Content-Disposition' => 'inline; filename="' . s($webProject->getTitle()->getEn())->snake() . '"',
                     'Cache-Control' => 'max-age=290304000, public'
                 ];
-                $imageWidth = intval($this->bag->get('webProjectImageWidth'));
+                $imageWidth = intval($this->bag->get('tinyImageWidth'));
 
                 return new Response(
                     $this->imageOptimizer->resize($image, $imageWidth),
@@ -55,11 +55,25 @@ class ImageController extends AbstractController
         );
     }
 
-    #[Route('/storage/{size}/{imageName}', name: 'uploaded', requirements: ['size' => 'original|web|printed'])]
+    #[Route('/storage/{size}/{imageName}', name: 'uploaded', requirements: ['size' => 'original|tiny|small|medium|big'])]
     public function uploaded(string $imageName, string $size, Request $request): Response
     {
-        $host = $request->server->get('REQUEST_SCHEME') . '://' . $request->getHttpHost();
         $imagePath = __DIR__ . '/../../var/data/' . $imageName;
+        return $this->localImage($imagePath, $size, $request);
+    }
+
+    #[Route('/asset/{size}/{imageName}', name: 'asset', requirements: ['size' => 'original|tiny|small|medium|big'])]
+    public function asset(string $imageName, string $size, Request $request): Response
+    {
+        $imagePath = __DIR__ . '/../../assets/images/' . $imageName;
+        return $this->localImage($imagePath, $size, $request);
+    }
+
+    private function localImage(string $imagePath, string $size, Request $request): Response
+    {
+        $host = $request->server->get('REQUEST_SCHEME') . '://' . $request->getHttpHost();
+        $pathArray = explode('/', $imagePath);
+        $imageName = end($pathArray);
 
         if (! str_starts_with((string) $request->server->get('HTTP_REFERER'), $host)) {
             throw $this->createNotFoundException("You cannot access resource outside $host");
@@ -71,9 +85,9 @@ class ImageController extends AbstractController
         if ($size === 'original') {
             $imageData = file_get_contents($imagePath);
         } else {
-            $imageWidth = intval($this->bag->get($size . 'ProjectImageWidth'));
+            $imageWidth = intval($this->bag->get($size . 'ImageWidth'));
             $imageData = $this->cache->get(
-                sprintf('image-%s-%s', $size, $imageName),
+                sprintf('image-%s-%s', $size, md5_file($imagePath)),
                 fn () => $this->imageOptimizer->resize(
                     (string) file_get_contents($imagePath),
                     $imageWidth

@@ -4,7 +4,8 @@
     {% include 'navbar.html.twig' %}
     {% if app.session.flashbag.get('spiderman-easteregg') %}
         <div id="spiderman-easteregg">
-            <img src="{{ asset('images/spiderman_easteregg.png') }}" alt="spidermans pointing at each other">
+            <img src="{{ path('image.asset', {'imageName':'spiderman_easteregg.png', 'size':'medium'}) }}"
+                 alt="spidermans pointing at each other">
         </div>
     {% endif %}
     <div id="app" data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-smooth-scroll="true" tabindex="0">

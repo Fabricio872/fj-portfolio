@@ -32,7 +32,8 @@ class ImageOptimizer
         }
 
         $photo = $this->imagine->load($image);
-        return $photo->resize(new Box($width, (int) $height))->get('jpeg');
+        $mimeArray = explode('/', (string) $this->getMime($image));
+        return $photo->resize(new Box($width, (int) $height))->get(end($mimeArray));
     }
 
     /**
