@@ -69,7 +69,7 @@ class AppController extends AbstractController
         /** @var array<int, GithubRepo> $repos */
         $repos = $this->denormalizer->denormalize(
             $this->cache->get('github_items', function (ItemInterface $item) {
-                $item->expiresAfter(DateInterval::createFromDateString('1 month'));
+                $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
                 return $this->githubReader->listRepositories();
             }),
             GithubRepo::class . '[]'
