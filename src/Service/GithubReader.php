@@ -4,29 +4,48 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Model\GithubRepo;
 use Github\Client;
 use Http\Client\HttpClient;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class GithubReader
 {
     private readonly Client $client;
 
     public function __construct(
-        HttpClient $httpClient,
+        HttpClient                             $httpClient,
+        private DenormalizerInterface          $denormalizer,
         private readonly ParameterBagInterface $parameterBag
-    ) {
+    )
+    {
         $this->client = Client::createWithHttpClient($httpClient);
     }
 
-    public function listRepositories(): array
+    public function getRepositoriesArray(): array
     {
         return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
     }
 
+    /**
+     * @return GithubRepo[]
+     */
+    public function getRepositories(): array
+    {
+        /** @var array<int, GithubRepo> $repos */
+        return $this->denormalizer->denormalize(
+            $this->getRepositoriesArray(),
+            GithubRepo::class . '[]'
+        );
+    }
+
     public function getRepository(int $id): array
     {
-        return $this->client->api('repo')->showById($id);
+        return $this->denormalizer->denormalize(
+            $this->client->api('repo')->showById($id),
+            GithubRepo::class
+        );
     }
 
     public function getTag(string $repoName): array

@@ -22,19 +22,19 @@
                 <ul class="nav flex-column">
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#header">{{ 'navbar.item.header'|trans }}</a>
+                           href="{{ path('app.index') }}#header">{{ 'navbar.item.header'|trans }}</a>
                     </li>
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#web">{{ 'navbar.item.web'|trans }}</a>
+                           href="{{ path('app.index') }}#web">{{ 'navbar.item.web'|trans }}</a>
                     </li>
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#printed">{{ 'navbar.item.printed'|trans }}</a>
+                           href="{{ path('app.index') }}#printed">{{ 'navbar.item.printed'|trans }}</a>
                     </li>
                     <li class="nav-item m-1">
                         <a class="nav-link btn"
-                           href="#github">{{ 'navbar.item.github'|trans }}</a>
+                           href="{{ path('app.index') }}#github">{{ 'navbar.item.github'|trans }}</a>
                     </li>
                     <li class="nav-item m-1">
                         {% include 'partials/contact_links.html.twig' %}

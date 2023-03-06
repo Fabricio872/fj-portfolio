@@ -8,9 +8,12 @@ use DateTime;
 
 class GithubRepo
 {
+    private int $id;
     private string $htmlUrl;
 
     private string $name;
+
+    private string $fullName;
 
     private ?string $description = null;
 
@@ -18,6 +21,24 @@ class GithubRepo
 
     private DateTime $pushedAt;
 
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return GithubRepo
+     */
+    public function setId(int $id): GithubRepo
+    {
+        $this->id = $id;
+        return $this;
+    }
     public function getHtmlUrl(): string
     {
         return $this->htmlUrl;
@@ -40,6 +61,17 @@ class GithubRepo
         return $this;
     }
 
+
+    public function getFullName(): string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): GithubRepo
+    {
+        $this->fullName = $fullName;
+        return $this;
+    }
     public function getDescription(): ?string
     {
         return $this->description;
@@ -72,4 +104,5 @@ class GithubRepo
         $this->pushedAt = new DateTime($pushedAt);
         return $this;
     }
+
 }

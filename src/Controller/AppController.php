@@ -29,11 +29,12 @@ use Symfony\Contracts\Cache\ItemInterface;
 class AppController extends AbstractController
 {
     public function __construct(
-        private readonly GithubReader $githubReader,
-        private readonly CacheInterface $cache,
+        private readonly GithubReader          $githubReader,
+        private readonly CacheInterface        $cache,
         private readonly ParameterBagInterface $parameterBag,
         private readonly DenormalizerInterface $denormalizer
-    ) {
+    )
+    {
     }
 
     #[Route('/', name: 'index')]
@@ -41,7 +42,7 @@ class AppController extends AbstractController
     {
         Carbon::setLocale($request->getLocale());
         $startDate = Carbon::create(new DateTime(strval($this->parameterBag->get('symfonyStartDate'))));
-        if (! $startDate) {
+        if (!$startDate) {
             throw new Exception("Wrong Start date provided");
         }
 
@@ -66,17 +67,13 @@ class AppController extends AbstractController
      */
     private function getGithubItems(): array
     {
-        /** @var array<int, GithubRepo> $repos */
-        $repos = $this->denormalizer->denormalize(
-            $this->cache->get('github_items', function (ItemInterface $item) {
-                $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
-                return $this->githubReader->listRepositories();
-            }),
-            GithubRepo::class . '[]'
-        );
+        return $this->cache->get('github_items', function (ItemInterface $item) {
+            $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
+            $repos = $this->githubReader->getRepositories();
 
-        uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
+            uasort($repos, fn($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
 
-        return $repos;
+            return $repos;
+        });
     }
 }

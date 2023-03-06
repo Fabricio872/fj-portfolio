@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <div class="app" data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-smooth-scroll="true" tabindex="0">
+        <div class="stripes page-container">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
+
+            <h2 class="text-center my-5">{{ repo. }}</h2>
+
+            <div class="container content-block">
+                <p>{{ content|raw }}</p>
+            </div>
+{#            <div class="container">#}
+{#            </div>#}
+        </div>
+        {% include 'footer.html.twig' %}
+    </div>
+{% endblock %}
