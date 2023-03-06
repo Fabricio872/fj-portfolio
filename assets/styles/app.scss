@@ -4,7 +4,7 @@
   text-decoration: underline;
 }
 
-#app {
+.app {
   scroll-snap-type: both mandatory;
 
   .page-container {
@@ -39,7 +39,7 @@
     }
   }
 
-  #header, #printed {
+  .stripes {
     overflow: hidden;
     min-height: 100vh;
 
@@ -92,7 +92,7 @@
     }
   }
 
-  #web, #github {
+  .lines {
     overflow: hidden;
     min-height: 100vh;
 
