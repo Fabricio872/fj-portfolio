@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Model\GithubRepo;
 use Github\Client;
 use Http\Client\HttpClient;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class GithubReader
 {
@@ -14,19 +16,42 @@ class GithubReader
 
     public function __construct(
         HttpClient $httpClient,
+        private readonly DenormalizerInterface $denormalizer,
         private readonly ParameterBagInterface $parameterBag
     ) {
         $this->client = Client::createWithHttpClient($httpClient);
     }
 
-    public function listRepositories(): array
+    public function getRepositoriesArray(): array
     {
         return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
     }
 
-    public function getRepository(int $id): array
+    /**
+     * @return GithubRepo[]
+     */
+    public function getRepositories(): array
     {
-        return $this->client->api('repo')->showById($id);
+        /** @var array<int, GithubRepo> $repos */
+        return $this->denormalizer->denormalize(
+            $this->getRepositoriesArray(),
+            GithubRepo::class . '[]'
+        );
+    }
+
+    public function getRepository(int $id): GithubRepo
+    {
+        return $this->denormalizer->denormalize(
+            $this->client->api('repo')->showById($id),
+            GithubRepo::class
+        );
+    }
+
+    public function getReadme(string $repoName): string
+    {
+        $readme = $this->client->api('repo')->contents()->readme($this->parameterBag->get('githubUser'), $repoName);
+
+        return base64_decode((string) $readme['content'], true);
     }
 
     public function getTag(string $repoName): array

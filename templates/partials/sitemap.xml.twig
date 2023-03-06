@@ -10,4 +10,16 @@
         <lastmod>2022-02-02T00:00:00+00:00</lastmod>
         <priority>1.00</priority>
     </url>
+    {% for repo in repos %}
+        <url>
+            <loc>{{ absolute_url(path('github.index', {'_locale': 'en', 'repoId': repo.id})) }}</loc>
+            <lastmod>{{ repo.pushedAt.format('c') }}</lastmod>
+            <priority>0.80</priority>
+        </url>
+        <url>
+            <loc>{{ absolute_url(path('github.index', {'_locale': 'sk', 'repoId': repo.id})) }}</loc>
+            <lastmod>{{ repo.pushedAt.format('c') }}</lastmod>
+            <priority>0.80</priority>
+        </url>
+    {% endfor %}
 </urlset>

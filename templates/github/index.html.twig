@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ repo.name }}{% endblock %}
+{% block ogTitle %}{{ repo.name }}{% endblock %}
+{% block metaTitle %}{{ repo.name }}{% endblock %}
+{% block ogDescription %}{{ repo.description }}{% endblock %}
+{% block metaDescription %}{{ repo.description }}{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    <div class="app" data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-smooth-scroll="true" tabindex="0">
+        <div class="stripes page-container">
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
+
+            <h2 class="text-center my-5">
+                {{ repo.name }}
+                {% if repo.stargazersCount %}
+                    <span class="badge bg-primary"><i class="bi bi-star"></i> {{ repo.stargazersCount }}</span>
+                {% endif %}
+            </h2>
+
+            <div class="container content-block markdown">
+                <a class="btn btn-primary mb-3" target="_blank" href="{{ repo.htmlUrl }}"><i class="bi bi-github"></i> {{ repo.fullName }}</a>
+
+                {{ content|markdown_to_html }}
+            </div>
+        </div>
+        {% include 'footer.html.twig' %}
+    </div>
+{% endblock %}

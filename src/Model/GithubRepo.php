@@ -8,15 +8,30 @@ use DateTime;
 
 class GithubRepo
 {
+    private int $id;
+
     private string $htmlUrl;
 
     private string $name;
+
+    private string $fullName;
 
     private ?string $description = null;
 
     private string $stargazersCount;
 
     private DateTime $pushedAt;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): GithubRepo
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     public function getHtmlUrl(): string
     {
@@ -37,6 +52,17 @@ class GithubRepo
     public function setName(string $name): GithubRepo
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): GithubRepo
+    {
+        $this->fullName = $fullName;
         return $this;
     }
 

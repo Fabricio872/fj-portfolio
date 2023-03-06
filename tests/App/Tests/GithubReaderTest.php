@@ -16,7 +16,7 @@ class GithubReaderTest extends KernelTestCase
         $container = static::getContainer();
         /** @var GithubReader $githubReader */
         $githubReader = $container->get(GithubReader::class);
-        $this->assertIsArray($githubReader->listRepositories());
+        $this->assertIsArray($githubReader->getRepositoriesArray());
     }
 
     public function testGetRepository()
