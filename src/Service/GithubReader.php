@@ -15,11 +15,10 @@ class GithubReader
     private readonly Client $client;
 
     public function __construct(
-        HttpClient                             $httpClient,
-        private DenormalizerInterface          $denormalizer,
+        HttpClient $httpClient,
+        private readonly DenormalizerInterface $denormalizer,
         private readonly ParameterBagInterface $parameterBag
-    )
-    {
+    ) {
         $this->client = Client::createWithHttpClient($httpClient);
     }
 
@@ -48,11 +47,11 @@ class GithubReader
         );
     }
 
-    public function getReadme(string $repoName):string
+    public function getReadme(string $repoName): string
     {
         $readme = $this->client->api('repo')->contents()->readme($this->parameterBag->get('githubUser'), $repoName);
 
-        return base64_decode($readme['content']);
+        return base64_decode((string) $readme['content'], true);
     }
 
     public function getTag(string $repoName): array

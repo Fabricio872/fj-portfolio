@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -29,11 +28,10 @@ use Symfony\Contracts\Cache\ItemInterface;
 class AppController extends AbstractController
 {
     public function __construct(
-        private readonly GithubReader          $githubReader,
-        private readonly CacheInterface        $cache,
+        private readonly GithubReader $githubReader,
+        private readonly CacheInterface $cache,
         private readonly ParameterBagInterface $parameterBag
-    )
-    {
+    ) {
     }
 
     #[Route('/', name: 'index')]
@@ -41,7 +39,7 @@ class AppController extends AbstractController
     {
         Carbon::setLocale($request->getLocale());
         $startDate = Carbon::create(new DateTime(strval($this->parameterBag->get('symfonyStartDate'))));
-        if (!$startDate) {
+        if (! $startDate) {
             throw new Exception("Wrong Start date provided");
         }
 
@@ -70,7 +68,7 @@ class AppController extends AbstractController
             $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
             $repos = $this->githubReader->getRepositories();
 
-            uasort($repos, fn($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
+            uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
 
             return $repos;
         });
