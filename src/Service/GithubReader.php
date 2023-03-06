@@ -40,12 +40,19 @@ class GithubReader
         );
     }
 
-    public function getRepository(int $id): array
+    public function getRepository(int $id): GithubRepo
     {
         return $this->denormalizer->denormalize(
             $this->client->api('repo')->showById($id),
             GithubRepo::class
         );
+    }
+
+    public function getReadme(string $repoName):string
+    {
+        $readme = $this->client->api('repo')->contents()->readme($this->parameterBag->get('githubUser'), $repoName);
+
+        return base64_decode($readme['content']);
     }
 
     public function getTag(string $repoName): array

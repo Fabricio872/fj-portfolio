@@ -31,8 +31,7 @@ class AppController extends AbstractController
     public function __construct(
         private readonly GithubReader          $githubReader,
         private readonly CacheInterface        $cache,
-        private readonly ParameterBagInterface $parameterBag,
-        private readonly DenormalizerInterface $denormalizer
+        private readonly ParameterBagInterface $parameterBag
     )
     {
     }

@@ -1,7 +1,15 @@
 
-.markdown * a {
-  color: $text-color !important;
-  text-decoration: underline;
+.markdown {
+  * a {
+    color: $text-color !important;
+    text-decoration: underline;
+  }
+
+  pre {
+    background-color: $color-primary;
+    padding: $list-inline-padding;
+    border-radius: $border-radius;
+  }
 }
 
 .app {
