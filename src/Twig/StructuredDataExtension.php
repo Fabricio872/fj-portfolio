@@ -42,7 +42,7 @@ class StructuredDataExtension extends AbstractExtension
         $printedProjects = $this->em->getRepository(PrintedProject::class)->findAll();
 
         $website
-            ->url($this->trans('meta.sd.url'))
+            ->url($this->router->generate('app.index', referenceType: UrlGeneratorInterface::ABSOLUTE_URL))
             ->name($this->trans('meta.sd.name'))
             ->image(
                 array_merge(
@@ -66,14 +66,18 @@ class StructuredDataExtension extends AbstractExtension
         $webpage
             ->name($this->trans('meta.sd.name'))
             ->description($this->trans('meta.sd.description'))
-            ->url($this->trans('meta.sd.url'))
+            ->url($this->router->generate('app.index', referenceType: UrlGeneratorInterface::ABSOLUTE_URL))
             ->image(
                 Schema::imageObject()
-                    ->url($this->trans('meta.sd.image'))
+                    ->url($this->router->generate(
+                        'image.asset',
+                        ['imageName' => 'profile_picture.jpg', 'size' => 'medium'],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    ))
             )
             ->potentialAction([
                 Schema::readAction()->target(
-                    Schema::entryPoint()->url($this->trans('meta.sd.url'))
+                    Schema::entryPoint()->url($this->router->generate('app.index', referenceType: UrlGeneratorInterface::ABSOLUTE_URL))
                 ),
             ]);
 
@@ -83,12 +87,16 @@ class StructuredDataExtension extends AbstractExtension
 
         $localBusiness
             ->name($this->trans('meta.sd.name'))
-            ->url($this->trans('meta.sd.url'))
+            ->url($this->router->generate('app.index', referenceType: UrlGeneratorInterface::ABSOLUTE_URL))
             ->logo($this->trans('meta.sd.logo'))
             ->priceRange('$')
             ->image(
                 Schema::imageObject()
-                    ->url($this->trans('meta.sd.image'))
+                    ->url($this->router->generate(
+                        'image.asset',
+                        ['imageName' => 'profile_picture.jpg', 'size' => 'medium'],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    ))
             )
             ->founder(
                 Schema::person()

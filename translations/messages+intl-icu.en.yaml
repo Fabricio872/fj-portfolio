@@ -1,36 +1,41 @@
 lang: en
-title: __title
+title: 'Fabricio Jakubec - portfolio'
 app:
     header:
-        title: __app.header.title
-        content: '%work%'
+        title: 'Fabricio Jakubec - portfolio'
+        content: 'Programming is not only my passion but also my pleasure. My primary language is PHP and most often I work in the Symfony framework in which I started working like {symfony_interval} and I still like it.'
     web-projects:
-        title: __app.web-projects.title
-        description: __app.web-projects.description
+        title: 'Web projects'
+        description: 'Those are my projects which are publicly available if you want to check them.'
     printed-projects:
-        title: __app.printed-projects.title
-        description: __app.printed-projects.description
+        title: '3D printed projects'
+        description: 'Another of my passion is designing and printing 3D models mostly designed in Fusion 360.'
     github-projects:
-        title: __app.github-projects.title
-        description: __app.github-projects.description
+        title: 'List of my GitHub projects'
+        description: 'Among my favorite projects is RegisterCommandBundle which is a Symfony bundle for users administration through the terminal. Then there is above mentioned 3D printer enclosure. Then useful for me are TeamCity agents. I have one for docker pipelines and one for standard web hosting builds. The second one uses my script for Ubuntu to install all php libraries and tools i use.'
 navbar:
-    title: __navbar.title
+    title: 'Fabricio Jakubec - portfolio'
     item:
-        header: __navbar.item.header
-        web: __navbar.item.web
-        printed: __navbar.item.printed
-        github: __navbar.item.github
+        header: 'Home page'
+        web: 'Web projects'
+        printed: 'Printed projects'
+        github: 'My Github'
 footer:
-    title: __footer.title
-    description: __footer.description
+    title: 'Contact me'
+    description: 'Do not hesitate to contact me through one of those platforms'
 contact:
-    email: __contact.email
-    facebook: __contact.facebook
-    github: __contact.github
+    email: fabricio872@gmail.com
+    facebook: 'https://www.facebook.com/fabricio.jakubec/'
+    github: 'https://github.com/Fabricio872'
 meta:
-    title: __meta.title
-    description: __meta.description
+    title: 'Fabricio Jakubec - portfolio'
+    description: 'Programming is not only my passion but also my pleasure. My primary language is PHP and most often I work in the Symfony framework.'
     og:
-        url: __meta.og.url
-        title: __meta.og.title
-        description: __meta.og.description
+        title: 'Fabricio Jakubec - portfolio'
+        description: 'Programming is not only my passion but also my pleasure. My primary language is PHP and most often I work in the Symfony framework.'
+    sd:
+        name: 'Fabricio Jakubec'
+        description: 'Programmer with a passion for PHP and 3D modeling.'
+        author: 'Fabricio Jakubec'
+        city: 'Kosice'
+        country: 'SK'
