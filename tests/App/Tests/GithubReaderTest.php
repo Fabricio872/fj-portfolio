@@ -28,7 +28,7 @@ class GithubReaderTest extends KernelTestCase
         $githubReader = $container->get(GithubReader::class);
         $repo = $githubReader->getRepository(356_671_779); // Fabricio872/RegisterCommandBundle
 
-        $this->assertEquals('Fabricio872/RegisterCommandBundle', $repo['full_name']);
+        $this->assertEquals('Fabricio872/RegisterCommandBundle', $repo->getFullName());
     }
 
     public function testGetTag()

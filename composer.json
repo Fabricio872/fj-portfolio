@@ -96,7 +96,8 @@
         "ecs-fix": "vendor/bin/ecs check --fix",
         "rector": "vendor/bin/rector process --dry-run",
         "rector-fix": "vendor/bin/rector process",
-        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "phpunit": "vendor/phpunit/phpunit/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"
