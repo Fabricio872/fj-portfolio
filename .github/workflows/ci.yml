@@ -30,4 +30,4 @@ jobs:
             - name: Check HTTPS reachability
               run: curl -k https://localhost
             - name: phpunit tests
-              run: vendor/phpunit/phpunit/phpunit --no-progress
+              run: docker compose exec php vendor/phpunit/phpunit/phpunit --no-progress
