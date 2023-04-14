@@ -44,6 +44,9 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
+    "fabricio872/random-message-bundle": {
+        "version": "v0.1.10"
+    },
     "fabricio872/register-command": {
         "version": "v1.3.2"
     },

@@ -4,6 +4,7 @@ app:
     header:
         title: 'Fabricio Jakubec - portfolio'
         content: 'Programming is not only my passion but also my pleasure. My primary language is PHP and most often I work in the Symfony framework in which I started working like {symfony_interval} and I still like it.'
+        joke-intro: 'Joke of the day:'
     web-projects:
         title: 'Web projects'
         description: 'Those are my projects which are publicly available if you want to check them.'
@@ -37,5 +38,6 @@ meta:
         name: 'Fabricio Jakubec'
         description: 'Programmer with a passion for PHP and 3D modeling.'
         author: 'Fabricio Jakubec'
-        city: 'Kosice'
-        country: 'SK'
+        city: Kosice
+        country: SK
+        logo: __meta.sd.logo

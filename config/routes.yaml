@@ -4,5 +4,5 @@ controllers:
         namespace: App\Controller
     type: attribute
     prefix:
-        sk: '/' # don't prefix URLs for English, the default locale
-        en: '/en'
+        en: '/' # don't prefix URLs for English, the default locale
+        sk: '/sk'
