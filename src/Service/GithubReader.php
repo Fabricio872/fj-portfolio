@@ -24,13 +24,13 @@ class GithubReader
 
     public function getRepositoriesArray(bool $requestTag = false): array
     {
-        if (!$requestTag){
+        if (! $requestTag) {
             return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
         }
         $repos = $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
         return array_map(function ($repo) {
             $repo['tags'] = $this->getTag($repo['name']);
-            if($repo['tags']){
+            if ($repo['tags']) {
                 $repo['latestTag'] = $repo['tags'][0]['name'];
             }
             return $repo;
