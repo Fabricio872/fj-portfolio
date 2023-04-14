@@ -65,8 +65,8 @@ class AppController extends AbstractController
     private function getGithubItems(): array
     {
         return $this->cache->get('github_items', function (ItemInterface $item) {
-            $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
-            $repos = $this->githubReader->getRepositories();
+            $item->expiresAfter(DateInterval::createFromDateString('2 hour'));
+            $repos = $this->githubReader->getRepositories(true);
 
             uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
 

@@ -20,6 +20,8 @@ class GithubRepo
 
     private string $stargazersCount;
 
+    private ?string $latestTag = null;
+
     private DateTime $pushedAt;
 
     public function getId(): int
@@ -85,6 +87,17 @@ class GithubRepo
     public function setStargazersCount(string $stargazersCount): GithubRepo
     {
         $this->stargazersCount = $stargazersCount;
+        return $this;
+    }
+
+    public function getLatestTag(): ?string
+    {
+        return $this->latestTag;
+    }
+
+    public function setLatestTag(?string $latestTag): GithubRepo
+    {
+        $this->latestTag = $latestTag;
         return $this;
     }
 
