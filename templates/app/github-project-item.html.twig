@@ -9,7 +9,9 @@
             {% endif %}
         </h5>
         <p class="card-text">{{ githubProject.description }}</p>
+        {% if githubProject.latestTag %}
+            <p><span class="badge bg-primary">{{ githubProject.latestTag }}</span></p>
+        {% endif %}
         <p class="card-text text-secondary position-absolute bottom-0">{{ githubProject.pushedAt|date() }}</p>
-
     </div>
 </a>

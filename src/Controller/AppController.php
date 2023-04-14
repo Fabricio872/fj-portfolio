@@ -13,7 +13,9 @@ use DateInterval;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Github\Exception\ApiLimitExceedException;
 use Psr\Cache\InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,6 +32,7 @@ class AppController extends AbstractController
     public function __construct(
         private readonly GithubReader $githubReader,
         private readonly CacheInterface $cache,
+        private readonly LoggerInterface $logger,
         private readonly ParameterBagInterface $parameterBag
     ) {
     }
@@ -43,11 +46,18 @@ class AppController extends AbstractController
             throw new Exception("Wrong Start date provided");
         }
 
+        try {
+            $githubProjects = $this->getGithubItems();
+        } catch (ApiLimitExceedException $exception) {
+            $githubProjects = [];
+            $this->logger->warning($exception->getMessage());
+        }
+
         return $this->render('app/index.html.twig', [
             'symfonyInterval' => $startDate->longRelativeToNowDiffForHumans(parts: 5),
             'webProjects' => $em->getRepository(WebProject::class)->findAll(),
             'printedProjects' => $em->getRepository(PrintedProject::class)->findAll(),
-            'githubProjects' => $this->getGithubItems()
+            'githubProjects' => $githubProjects
         ]);
     }
 
@@ -65,8 +75,8 @@ class AppController extends AbstractController
     private function getGithubItems(): array
     {
         return $this->cache->get('github_items', function (ItemInterface $item) {
-            $item->expiresAfter(DateInterval::createFromDateString('1 hour'));
-            $repos = $this->githubReader->getRepositories();
+            $item->expiresAfter(DateInterval::createFromDateString('2 hour'));
+            $repos = $this->githubReader->getRepositories(true);
 
             uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
 

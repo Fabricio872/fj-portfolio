@@ -22,19 +22,29 @@ class GithubReader
         $this->client = Client::createWithHttpClient($httpClient);
     }
 
-    public function getRepositoriesArray(): array
+    public function getRepositoriesArray(bool $requestTag = false): array
     {
-        return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
+        if (! $requestTag) {
+            return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
+        }
+        $repos = $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
+        return array_map(function ($repo) {
+            $repo['tags'] = $this->getTag($repo['name']);
+            if ($repo['tags']) {
+                $repo['latestTag'] = $repo['tags'][0]['name'];
+            }
+            return $repo;
+        }, $repos);
     }
 
     /**
      * @return GithubRepo[]
      */
-    public function getRepositories(): array
+    public function getRepositories(bool $requestTag = false): array
     {
         /** @var array<int, GithubRepo> $repos */
         return $this->denormalizer->denormalize(
-            $this->getRepositoriesArray(),
+            $this->getRepositoriesArray($requestTag),
             GithubRepo::class . '[]'
         );
     }
