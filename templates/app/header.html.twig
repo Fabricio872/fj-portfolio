@@ -5,5 +5,9 @@
     <div class="content-title">
         <h1>{{ 'app.header.title'|trans }}</h1>
         <p>{{ 'app.header.content'|trans({'{symfony_interval}': symfonyInterval}) }}</p>
+        {% if(random_messge(app.request.locale)) %}
+        <p>{{ 'app.header.joke-intro'|trans }}</p>
+        <p>{{ random_messge(app.request.locale) }}</p>
+        {% endif %}
     </div>
 </div>
