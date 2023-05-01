@@ -16,7 +16,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents():array
+    public static function getSubscribedEvents(): array
     {
         return [
             AfterEntityUpdatedEvent::class => ['dumpWebProjectImage'],
