@@ -6,4 +6,4 @@ parameters:
 	    - src/Service/GithubReader
 	doctrine:
 		objectManagerLoader: tests/object-manager.php
-
+	checkGenericClassInNonGenericObjectType: false

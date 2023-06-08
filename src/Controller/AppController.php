@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\PrintedProject;
 use App\Entity\WebProject;
+use App\Exception\InvalidConfigParameterTypeException;
 use App\Model\GithubRepo;
 use App\Service\GithubReader;
 use Carbon\Carbon;
@@ -41,7 +42,11 @@ class AppController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         Carbon::setLocale($request->getLocale());
-        $startDate = Carbon::create(new DateTime(strval($this->parameterBag->get('symfonyStartDate'))));
+        $symfonyStartDate = $this->parameterBag->get('symfonyStartDate');
+        if (! is_string($symfonyStartDate)) {
+            throw new InvalidConfigParameterTypeException('symfonyStartDate', 'string');
+        }
+        $startDate = Carbon::create(new DateTime($symfonyStartDate));
         if (! $startDate) {
             throw new Exception("Wrong Start date provided");
         }
