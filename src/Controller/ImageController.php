@@ -48,7 +48,7 @@ class ImageController extends AbstractController
                 ];
                 $imageWidth = $this->bag->get('tinyImageWidth');
                 if (! is_int($imageWidth)) {
-                    throw new InvalidConfigParameterTypeException('tinyImageWidth', 'int');
+                    throw new InvalidConfigParameterTypeException('tinyImageWidth', 'int', $imageWidth);
                 }
 
                 return new Response(
@@ -96,7 +96,7 @@ class ImageController extends AbstractController
         } else {
             $imageWidth = $this->bag->get($size . 'ImageWidth');
             if (! is_int($imageWidth)) {
-                throw new InvalidConfigParameterTypeException('ImageWidth', 'int');
+                throw new InvalidConfigParameterTypeException('ImageWidth', 'int', $imageWidth);
             }
             $imageData = $this->cache->get(
                 sprintf('image-%s-%s', $size, md5_file($imagePath)),
@@ -107,7 +107,7 @@ class ImageController extends AbstractController
             );
         }
         if (! is_string($imageData)) {
-            throw new InvalidConfigParameterTypeException('imageData', 'string');
+            throw new InvalidConfigParameterTypeException('imageData', 'string', $imageData);
         }
         $headers = [
             'Content-Type' => $this->imageOptimizer->getMime($imageData),

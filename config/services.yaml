@@ -5,10 +5,10 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     seleniumUrl: '%env(resolve:SELENIUM_URL)%'
-    tinyImageWidth: '%env(resolve:TINY_IMAGE_WIDTH)%'
-    smallImageWidth: '%env(resolve:SMALL_IMAGE_WIDTH)%'
-    mediumImageWidth: '%env(resolve:MEDIUM_IMAGE_WIDTH)%'
-    bigImageWidth: '%env(resolve:BIG_IMAGE_WIDTH)%'
+    tinyImageWidth: '%env(int:resolve:TINY_IMAGE_WIDTH)%'
+    smallImageWidth: '%env(int:resolve:SMALL_IMAGE_WIDTH)%'
+    mediumImageWidth: '%env(int:resolve:MEDIUM_IMAGE_WIDTH)%'
+    bigImageWidth: '%env(int:resolve:BIG_IMAGE_WIDTH)%'
     noImage: '%kernel.project_dir%/assets/images/no-image.jpg'
     githubUser: '%env(resolve:GITHUB_USERNAME)%'
     symfonyStartDate: '1.12.2017 08:00'
