@@ -34,6 +34,10 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
+[*.neon]
+indent_style = tab
+indent_size = 4
+
 [*.xml{,.dist}]
 indent_style = space
 indent_size = 4

@@ -23,7 +23,12 @@ class ImageOptimizer
         if (! $image) {
             throw new Exception("No image data provided");
         }
-        [$iwidth, $iheight] = (array) getimagesizefromstring($image);
+        $imageData = getimagesizefromstring($image);
+        if (! $imageData) {
+            throw new Exception("Wrong image data provided");
+        }
+
+        [$iwidth, $iheight] = $imageData;
         $ratio = $iwidth / $iheight;
         if ($width / $height > $ratio) {
             $width = $height * $ratio;

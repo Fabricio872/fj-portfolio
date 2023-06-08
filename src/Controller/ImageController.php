@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\WebProject;
+use App\Exception\InvalidConfigParameterTypeException;
 use App\Service\ImageOptimizer;
 use App\Service\SeleniumImage;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +46,10 @@ class ImageController extends AbstractController
                     'Content-Disposition' => 'inline; filename="' . s($webProject->getTitle()->getEn())->snake() . '"',
                     'Cache-Control' => 'max-age=290304000, public'
                 ];
-                $imageWidth = intval($this->bag->get('tinyImageWidth'));
+                $imageWidth = $this->bag->get('tinyImageWidth');
+                if (! is_int($imageWidth)) {
+                    throw new InvalidConfigParameterTypeException('tinyImageWidth', 'int');
+                }
 
                 return new Response(
                     $this->imageOptimizer->resize($image, $imageWidth),
@@ -69,6 +74,10 @@ class ImageController extends AbstractController
         return $this->localImage($imagePath, $size, $request);
     }
 
+    /**
+     * @throws InvalidConfigParameterTypeException
+     * @throws InvalidArgumentException
+     */
     private function localImage(string $imagePath, string $size, Request $request): Response
     {
         $host = $request->server->get('REQUEST_SCHEME') . '://' . $request->getHttpHost();
@@ -85,7 +94,10 @@ class ImageController extends AbstractController
         if ($size === 'original') {
             $imageData = file_get_contents($imagePath);
         } else {
-            $imageWidth = intval($this->bag->get($size . 'ImageWidth'));
+            $imageWidth = $this->bag->get($size . 'ImageWidth');
+            if (! is_int($imageWidth)) {
+                throw new InvalidConfigParameterTypeException('ImageWidth', 'int');
+            }
             $imageData = $this->cache->get(
                 sprintf('image-%s-%s', $size, md5_file($imagePath)),
                 fn () => $this->imageOptimizer->resize(
@@ -94,7 +106,9 @@ class ImageController extends AbstractController
                 )
             );
         }
-
+        if (! is_string($imageData)) {
+            throw new InvalidConfigParameterTypeException('imageData', 'string');
+        }
         $headers = [
             'Content-Type' => $this->imageOptimizer->getMime($imageData),
             'Content-Disposition' => 'inline; filename="' . $imageName . '"',
