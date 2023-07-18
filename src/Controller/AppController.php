@@ -14,9 +14,7 @@ use DateInterval;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Github\Exception\ApiLimitExceedException;
 use Psr\Cache\InvalidArgumentException;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,11 +29,11 @@ use Symfony\Contracts\Cache\ItemInterface;
 class AppController extends AbstractController
 {
     public function __construct(
-        private readonly GithubReader $githubReader,
-        private readonly CacheInterface $cache,
-        private readonly LoggerInterface $logger,
+        private readonly GithubReader          $githubReader,
+        private readonly CacheInterface        $cache,
         private readonly ParameterBagInterface $parameterBag
-    ) {
+    )
+    {
     }
 
     #[Route('/', name: 'index')]
@@ -43,26 +41,26 @@ class AppController extends AbstractController
     {
         Carbon::setLocale($request->getLocale());
         $symfonyStartDate = $this->parameterBag->get('symfonyStartDate');
-        if (! is_string($symfonyStartDate)) {
+        if (!is_string($symfonyStartDate)) {
             throw new InvalidConfigParameterTypeException('symfonyStartDate', 'string');
         }
         $startDate = Carbon::create(new DateTime($symfonyStartDate));
-        if (! $startDate) {
+        if (!$startDate) {
             throw new Exception("Wrong Start date provided");
         }
 
-        try {
-            $githubProjects = $this->getGithubItems();
-        } catch (ApiLimitExceedException $exception) {
-            $githubProjects = [];
-            $this->logger->warning($exception->getMessage());
-        }
+//        try {
+//            $githubProjects = $em->getRepository(\App\Entity\GithubRepo::class)->findAll();
+//        } catch (ApiLimitExceedException $exception) {
+//            $githubProjects = [];
+//            $this->logger->warning($exception->getMessage());
+//        }
 
         return $this->render('app/index.html.twig', [
             'symfonyInterval' => $startDate->longRelativeToNowDiffForHumans(parts: 5),
             'webProjects' => $em->getRepository(WebProject::class)->findAll(),
             'printedProjects' => $em->getRepository(PrintedProject::class)->findAll(),
-            'githubProjects' => $githubProjects
+            'githubProjects' => $em->getRepository(\App\Entity\GithubRepo::class)->findBy([], ["pushedAt" => "DESC"])
         ]);
     }
 
@@ -83,7 +81,7 @@ class AppController extends AbstractController
             $item->expiresAfter(DateInterval::createFromDateString('2 hour'));
             $repos = $this->githubReader->getRepositories(true);
 
-            uasort($repos, fn ($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
+            uasort($repos, fn($a, $b) => $b->getPushedAt() <=> $a->getPushedAt());
 
             return $repos;
         });
