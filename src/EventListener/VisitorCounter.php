@@ -10,10 +10,10 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 #[AsEventListener]
-final class VisitorCounter
+final readonly class VisitorCounter
 {
     public function __construct(
-        private readonly EntityManagerInterface $em
+        private EntityManagerInterface $em
     ) {
     }
 
