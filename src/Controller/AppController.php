@@ -48,13 +48,6 @@ class AppController extends AbstractController
             throw new Exception("Wrong Start date provided");
         }
 
-        //        try {
-        //            $githubProjects = $em->getRepository(\App\Entity\GithubRepo::class)->findAll();
-        //        } catch (ApiLimitExceedException $exception) {
-        //            $githubProjects = [];
-        //            $this->logger->warning($exception->getMessage());
-        //        }
-
         return $this->render('app/index.html.twig', [
             'symfonyInterval' => $startDate->longRelativeToNowDiffForHumans(parts: 5),
             'webProjects' => $em->getRepository(WebProject::class)->findAll(),
