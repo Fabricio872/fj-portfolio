@@ -2,36 +2,51 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Entity;
 
-use DateTime;
+use App\Repository\GithubRepoRepository;
+use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: GithubRepoRepository::class)]
 class GithubRepo
 {
+    #[ORM\Id]
+    #[ORM\CustomIdGenerator]
+    #[ORM\Column]
     private int $id;
 
+    #[ORM\Column(length: 255)]
     private string $htmlUrl;
 
+    #[ORM\Column(length: 255)]
     private string $name;
 
+    #[ORM\Column(length: 255)]
     private string $fullName;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
     private string $stargazersCount;
 
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $latestTag = null;
 
-    private DateTime $pushedAt;
+    #[ORM\Column]
+    private DateTimeImmutable $pushedAt;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): GithubRepo
+    public function setId(int $id): static
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -40,9 +55,10 @@ class GithubRepo
         return $this->htmlUrl;
     }
 
-    public function setHtmlUrl(string $htmlUrl): GithubRepo
+    public function setHtmlUrl(string $htmlUrl): static
     {
         $this->htmlUrl = $htmlUrl;
+
         return $this;
     }
 
@@ -51,9 +67,10 @@ class GithubRepo
         return $this->name;
     }
 
-    public function setName(string $name): GithubRepo
+    public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -62,9 +79,10 @@ class GithubRepo
         return $this->fullName;
     }
 
-    public function setFullName(string $fullName): GithubRepo
+    public function setFullName(string $fullName): static
     {
         $this->fullName = $fullName;
+
         return $this;
     }
 
@@ -73,20 +91,22 @@ class GithubRepo
         return $this->description;
     }
 
-    public function setDescription(?string $description): GithubRepo
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
-    public function getStargazersCount(): string
+    public function getStargazersCount(): ?string
     {
         return $this->stargazersCount;
     }
 
-    public function setStargazersCount(string $stargazersCount): GithubRepo
+    public function setStargazersCount(string $stargazersCount): static
     {
         $this->stargazersCount = $stargazersCount;
+
         return $this;
     }
 
@@ -95,20 +115,22 @@ class GithubRepo
         return $this->latestTag;
     }
 
-    public function setLatestTag(?string $latestTag): GithubRepo
+    public function setLatestTag(?string $latestTag): static
     {
         $this->latestTag = $latestTag;
+
         return $this;
     }
 
-    public function getPushedAt(): DateTime
+    public function getPushedAt(): ?DateTimeImmutable
     {
         return $this->pushedAt;
     }
 
-    public function setPushedAt(string $pushedAt): GithubRepo
+    public function setPushedAt(DateTimeImmutable $pushedAt): static
     {
-        $this->pushedAt = new DateTime($pushedAt);
+        $this->pushedAt = $pushedAt;
+
         return $this;
     }
 }

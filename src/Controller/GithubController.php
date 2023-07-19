@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\GithubRepo;
 use App\Service\GithubReader;
 use DateInterval;
 use Github\Exception\RuntimeException;
@@ -16,18 +17,12 @@ use Symfony\Contracts\Cache\ItemInterface;
 #[Route('/github', name: 'github.')]
 class GithubController extends AbstractController
 {
-    #[Route('/{repoId}', name: 'index')]
-    public function index(int $repoId, GithubReader $githubReader, CacheInterface $cache): Response
+    #[Route('/{id}', name: 'index')]
+    public function index(GithubRepo $repo, GithubReader $githubReader, CacheInterface $cache): Response
     {
         try {
-            $repo = $githubReader->getRepository($repoId);
-        } catch (RuntimeException) {
-            throw $this->createNotFoundException();
-        }
-
-        try {
             $readme = $cache->get(sprintf('readme-%s', $repo->getName()), function (ItemInterface $item) use ($githubReader, $repo) {
-                $item->expiresAfter(DateInterval::createFromDateString('1 day'));
+                $item->expiresAfter(DateInterval::createFromDateString('1 week'));
                 return $githubReader->getReadme($repo->getName());
             });
         } catch (RuntimeException) {

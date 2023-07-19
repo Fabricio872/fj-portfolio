@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Model\GithubRepo;
+use App\Entity\GithubRepo;
+use DateTimeImmutable;
 use Github\Client;
-use Http\Client\HttpClient;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class GithubReader
@@ -15,7 +18,7 @@ class GithubReader
     private readonly Client $client;
 
     public function __construct(
-        HttpClient $httpClient,
+        ClientInterface $httpClient,
         private readonly DenormalizerInterface $denormalizer,
         private readonly ParameterBagInterface $parameterBag
     ) {
@@ -39,13 +42,20 @@ class GithubReader
 
     /**
      * @return GithubRepo[]
+     * @throws ExceptionInterface
      */
     public function getRepositories(bool $requestTag = false): array
     {
         /** @var array<int, GithubRepo> $repos */
         return $this->denormalizer->denormalize(
             $this->getRepositoriesArray($requestTag),
-            GithubRepo::class . '[]'
+            GithubRepo::class . '[]',
+            context: [
+                AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
+                AbstractObjectNormalizer::CALLBACKS => [
+                    'pushed_at' => self::dateCallback(...),
+                ]
+            ]
         );
     }
 
@@ -53,7 +63,13 @@ class GithubReader
     {
         return $this->denormalizer->denormalize(
             $this->client->api('repo')->showById($id),
-            GithubRepo::class
+            GithubRepo::class,
+            context: [
+                AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
+                AbstractObjectNormalizer::CALLBACKS => [
+                    'pushed_at' => self::dateCallback(...),
+                ]
+            ]
         );
     }
 
@@ -72,5 +88,10 @@ class GithubReader
     public function getCommit(string $repoName, string $commit): array
     {
         return $this->client->api('repo')->commits()->show($this->parameterBag->get('githubUser'), $repoName, $commit);
+    }
+
+    public static function dateCallback(string $innerObject, string $outerObject, string $attributeName, string $format = null, array $context = []): DateTimeImmutable
+    {
+        return new DateTimeImmutable($innerObject);
     }
 }
