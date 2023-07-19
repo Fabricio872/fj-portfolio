@@ -18,17 +18,16 @@ class GithubReader
     private readonly Client $client;
 
     public function __construct(
-        ClientInterface                        $httpClient,
+        ClientInterface $httpClient,
         private readonly DenormalizerInterface $denormalizer,
         private readonly ParameterBagInterface $parameterBag
-    )
-    {
+    ) {
         $this->client = Client::createWithHttpClient($httpClient);
     }
 
     public function getRepositoriesArray(bool $requestTag = false): array
     {
-        if (!$requestTag) {
+        if (! $requestTag) {
             return $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
         }
         $repos = $this->client->api('user')->repositories($this->parameterBag->get('githubUser'));
@@ -54,7 +53,7 @@ class GithubReader
             context: [
                 AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
                 AbstractObjectNormalizer::CALLBACKS => [
-                    'pushed_at' => call_user_func(self::dateCallback(...)),
+                    'pushed_at' => self::dateCallback(...),
                 ]
             ]
         );
@@ -68,7 +67,7 @@ class GithubReader
             context: [
                 AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
                 AbstractObjectNormalizer::CALLBACKS => [
-                    'pushed_at' => call_user_func(self::dateCallback(...)),
+                    'pushed_at' => self::dateCallback(...),
                 ]
             ]
         );
@@ -78,7 +77,7 @@ class GithubReader
     {
         $readme = $this->client->api('repo')->contents()->readme($this->parameterBag->get('githubUser'), $repoName);
 
-        return base64_decode((string)$readme['content'], true);
+        return base64_decode((string) $readme['content'], true);
     }
 
     public function getTag(string $repoName): array
