@@ -15,30 +15,30 @@ class GithubRepo
     #[ORM\Id]
     #[ORM\CustomIdGenerator]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $htmlUrl = null;
+    private string $htmlUrl;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(length: 255)]
-    private ?string $fullName = null;
+    private string $fullName;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $stargazersCount = null;
+    private string $stargazersCount;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $latestTag = null;
 
     #[ORM\Column]
-    private ?DateTimeImmutable $pushedAt = null;
+    private DateTimeImmutable $pushedAt;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -50,7 +50,7 @@ class GithubRepo
         return $this;
     }
 
-    public function getHtmlUrl(): ?string
+    public function getHtmlUrl(): string
     {
         return $this->htmlUrl;
     }
@@ -62,7 +62,7 @@ class GithubRepo
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -74,7 +74,7 @@ class GithubRepo
         return $this;
     }
 
-    public function getFullName(): ?string
+    public function getFullName(): string
     {
         return $this->fullName;
     }

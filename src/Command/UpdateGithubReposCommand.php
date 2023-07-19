@@ -38,7 +38,7 @@ class UpdateGithubReposCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        foreach ($this->githubReader->getRepositories() as $githubRepo) {
+        foreach ($this->githubReader->getRepositories(true) as $githubRepo) {
             $githubRepoDb = $this->em->getRepository(GithubRepo::class)->find($githubRepo);
             if (empty($githubRepoDb)) {
                 $this->em->persist($githubRepo);
