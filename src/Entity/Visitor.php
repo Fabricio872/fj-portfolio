@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use foroco\BrowserDetection;
 
 #[ORM\Entity(repositoryClass: VisitorRepository::class)]
 class Visitor
@@ -32,6 +33,9 @@ class Visitor
      */
     #[ORM\Column]
     private array $params = [];
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $userAgent = null;
 
     public function __construct()
     {
@@ -83,5 +87,24 @@ class Visitor
         $this->params = $params;
 
         return $this;
+    }
+
+    public function getUserAgent(): ?string
+    {
+        return $this->userAgent;
+    }
+
+    public function setUserAgent(?string $userAgent): static
+    {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    public function getBrowserDetection(): array
+    {
+        $browserDetection = new BrowserDetection();
+
+        return $browserDetection->getAll($this->userAgent);
     }
 }

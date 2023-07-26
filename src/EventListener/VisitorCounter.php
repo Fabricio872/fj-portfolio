@@ -30,7 +30,8 @@ final readonly class VisitorCounter
         $visitor
             ->setRoute((string) $event->getRequest()->attributes->get('_route'))
             ->setLocale((string) $event->getRequest()->attributes->get('_locale'))
-            ->setParams((array) $event->getRequest()->attributes->get('_route_params'));
+            ->setParams((array) $event->getRequest()->attributes->get('_route_params'))
+            ->setUserAgent((string) $event->getRequest()->server->get('HTTP_USER_AGENT'));
 
         $this->em->persist($visitor);
         $this->em->flush();

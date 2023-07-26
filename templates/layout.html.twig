@@ -35,6 +35,12 @@
         {{ structuredData()|raw }}
     </head>
     <body class="navbar-expanded">
+        {% if(getBrowser()['browser_chrome_original']) %}
+                <div class="alert content-block alert-warning" role="alert">
+                    {{ 'chrome-warning'|trans|raw }}
+                </div>
+        {% endif %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
