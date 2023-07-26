@@ -101,10 +101,13 @@ class Visitor
         return $this;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getBrowserDetection(): array
     {
         $browserDetection = new BrowserDetection();
 
-        return $browserDetection->getAll($this->userAgent);
+        return $browserDetection->getAll((string) $this->userAgent);
     }
 }
