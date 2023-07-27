@@ -25,6 +25,11 @@ navbar:
 footer:
     title: 'Kontaktujte ma'
     description: 'Neváhajte ma kontaktovať cez niektorú z tíchto platforiem.'
+contact:
+    email: fabricio872@gmail.com
+    facebook: 'https://www.facebook.com/fabricio.jakubec/'
+    github: 'https://github.com/Fabricio872'
+    linkedin: 'https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3BL6o3Oa9zQKSylLf7HKTlow%3D%3D'
 meta:
     title: 'Fabricio Jakubec - portfólio'
     description: 'Programovanie nieje len mojou profesiou, ale aj záľubou. Môj primárny jazyk je PHP a najčastejšie pracujem vo frameworku Symfony.'
@@ -38,7 +43,4 @@ meta:
         name: __meta.sd.name
         logo: __meta.sd.logo
         author: __meta.sd.author
-contact:
-    email: __contact.email
-    facebook: __contact.facebook
-    github: __contact.github
+chrome-warning: 'POZOR! Používate prehliadač založený na prehliadači Chromium. Tento prehliadač vytvorila spoločnosť Google – najväčšia reklamná spoločnosť na svete, ktorá má finančný záujem zabrániť vám v blokovaní reklám a získavaní vašich informácií, ktoré môžu speňažiť, a tým ochromiť slobodný a otvorený internet. <a target=\"_blank\" href=\"https://www.eff.org/deeplinks/2021/12/chrome-users-beware-manifest-v3-deceitful-and-threatening\">Tu</a> je viac informácií o tejto téme. Prejdite na open source alternatívu, kým nebude príliš neskoro.'

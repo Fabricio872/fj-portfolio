@@ -110,7 +110,7 @@
       overflow: hidden;
       text-decoration: none;
       cursor: pointer;
-      transition: .3s;
+      transition: $transition-base;
     }
 
     .card:hover {
