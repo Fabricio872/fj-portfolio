@@ -55,7 +55,11 @@ jobs:
       -
         name: Run PHPUnit
 #        if: false # Remove this line if PHPUnit is installed
-        run: docker compose exec -T php bin/phpunit
+        run: docker compose exec -T php composer phpunit
+      -
+        name: Run CS checks
+#        if: false # Remove this line if PHPUnit is installed
+        run: docker compose exec -T php composer cs
       -
         name: Doctrine Schema Validator
 #        if: false # Remove this line if Doctrine ORM is installed
