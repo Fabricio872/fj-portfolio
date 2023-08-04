@@ -37,6 +37,14 @@ RUN set -eux; \
 		zip \
     ;
 
+RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev libwebp-dev libxpm-dev && \
+  docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+  NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+  docker-php-ext-install -j$(nproc) gd && \
+  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+
 ###> recipes ###
 ###> doctrine/doctrine-bundle ###
 RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
