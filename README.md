@@ -1,5 +1,7 @@
 # Fabricio Jakubec - portfolio
 
+[Live version of this project](https://fabriciojakubec.ddns.net/)
+
 Welcome to my portfolio about me. If you found any bugs, errors, mistakes don`t hesitate to create issue. Also, any suggestions are appreciated. Have a great day! 
 
 [![CI](https://github.com/Fabricio872/fj-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Fabricio872/fj-portfolio/actions/workflows/ci.yml)
