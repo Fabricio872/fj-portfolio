@@ -71,6 +71,10 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+[compose{,.*}.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
 [Dockerfile]
 indent_style = tab
 indent_size = 4
